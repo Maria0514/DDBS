@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}分布式数据库系统 - 主页{% endblock %}
+
+{% block page_title %}欢迎使用分布式数据库系统{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+            <h1 class="display-4">
+                <i class="fas fa-database"></i>
+                分布式数据库系统
+            </h1>
+            <p class="lead">基于2PC（二阶段提交）协议的分布式事务管理系统</p>
+            <hr class="my-4">
+            <p>本系统实现了完整的分布式数据库架构，支持跨多个数据库节点的ACID事务处理。</p>
+            <a class="btn btn-light btn-lg" href="{{ url_for('dashboard') }}" role="button">
+                <i class="fas fa-tachometer-alt"></i>
+                进入仪表板
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cogs"></i>
+                    系统特性
+                </h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        2PC二阶段提交协议
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        分布式事务管理
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        ACID事务保证
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        故障恢复机制
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success"></i>
+                        实时监控界面
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-sitemap"></i>
+                    系统架构
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <div class="badge bg-primary p-2 mb-2">事务协调器</div>
+                    </div>
+                    <div class="d-flex justify-content-around">
+                        <div class="badge bg-secondary p-2">数据库1<br>MySQL:3306</div>
+                        <div class="badge bg-secondary p-2">数据库2<br>MySQL:3307</div>
+                    </div>
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            基于XA事务的分布式架构
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-bar"></i>
+                    快速统计
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="quick-stats">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h3 class="text-primary" id="total-accounts">-</h3>
+                            <small>总账户数</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-success" id="total-transactions">-</h3>
+                            <small>总交易数</small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h3 class="text-info" id="total-products">-</h3>
+                            <small>产品数量</small>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-warning" id="total-orders">-</h3>
+                            <small>订单数量</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle"></i>
+                    系统说明
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>2PC协议工作原理：</h6>
+                        <ol>
+                            <li><strong>准备阶段</strong>：协调器向所有参与者发送准备请求</li>
+                            <li><strong>投票阶段</strong>：参与者响应是否可以提交</li>
+                            <li><strong>提交阶段</strong>：根据投票结果决定提交或回滚</li>
+                            <li><strong>确认阶段</strong>：所有参与者确认操作完成</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>支持的业务场景：</h6>
+                        <ul>
+                            <li><strong>银行转账</strong>：跨账户的资金转移</li>
+                            <li><strong>库存管理</strong>：订单处理和库存更新</li>
+                            <li><strong>数据一致性</strong>：确保分布式数据的一致性</li>
+                            <li><strong>故障处理</strong>：网络故障和节点故障恢复</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 加载快速统计数据
+    function loadQuickStats() {
+        // 获取账户数量
+        fetch('/api/accounts')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('total-accounts').textContent = data.data.length;
+                }
+            })
+            .catch(error => console.error('Error loading accounts:', error));
+        
+        // 获取库存数量
+        fetch('/api/inventory')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('total-products').textContent = data.data.length;
+                }
+            })
+            .catch(error => console.error('Error loading inventory:', error));
+        
+        // 模拟其他统计数据
+        document.getElementById('total-transactions').textContent = Math.floor(Math.random() * 100);
+        document.getElementById('total-orders').textContent = Math.floor(Math.random() * 50);
+    }
+    
+    // 页面加载时获取统计数据
+    document.addEventListener('DOMContentLoaded', loadQuickStats);
+</script>
+{% endblock %}

@@ -1,0 +1,535 @@
+{% extends "base.html" %}
+
+{% block title %}事务管理 - 分布式数据库系统{% endblock %}
+
+{% block page_title %}分布式事务管理{% endblock %}
+
+{% block content %}
+<!-- 事务统计 -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-info">
+            <div class="card-body text-center">
+                <h3 id="total-transactions">0</h3>
+                <p>总事务数</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body text-center">
+                <h3 id="committed-transactions">0</h3>
+                <p>已提交</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body text-center">
+                <h3 id="aborted-transactions">0</h3>
+                <p>已回滚</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body text-center">
+                <h3 id="active-transactions">0</h3>
+                <p>活跃事务</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 2PC协议演示 -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cogs"></i>
+                    2PC协议演示
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="text-center">
+                            <h6>二阶段提交协议流程</h6>
+                            <div class="d-flex justify-content-center align-items-center mb-3">
+                                <!-- 协调器 -->
+                                <div class="text-center mx-3">
+                                    <div class="badge bg-primary p-3 mb-2" id="coordinator-status">
+                                        <i class="fas fa-server fa-2x"></i>
+                                    </div>
+                                    <div>协调器</div>
+                                </div>
+                                
+                                <!-- 箭头 -->
+                                <div class="mx-2">
+                                    <i class="fas fa-arrow-right text-muted" id="arrow1"></i>
+                                </div>
+                                
+                                <!-- 参与者1 -->
+                                <div class="text-center mx-3">
+                                    <div class="badge bg-secondary p-3 mb-2" id="participant1-status">
+                                        <i class="fas fa-database fa-2x"></i>
+                                    </div>
+                                    <div>数据库1</div>
+                                </div>
+                                
+                                <!-- 箭头 -->
+                                <div class="mx-2">
+                                    <i class="fas fa-arrow-left text-muted" id="arrow2"></i>
+                                </div>
+                                
+                                <!-- 协调器（中间） -->
+                                <div class="text-center mx-3">
+                                    <div class="badge bg-primary p-3 mb-2">
+                                        <i class="fas fa-exchange-alt fa-2x"></i>
+                                    </div>
+                                    <div>2PC</div>
+                                </div>
+                                
+                                <!-- 箭头 -->
+                                <div class="mx-2">
+                                    <i class="fas fa-arrow-right text-muted" id="arrow3"></i>
+                                </div>
+                                
+                                <!-- 参与者2 -->
+                                <div class="text-center mx-3">
+                                    <div class="badge bg-secondary p-3 mb-2" id="participant2-status">
+                                        <i class="fas fa-database fa-2x"></i>
+                                    </div>
+                                    <div>数据库2</div>
+                                </div>
+                                
+                                <!-- 箭头 -->
+                                <div class="mx-2">
+                                    <i class="fas fa-arrow-left text-muted" id="arrow4"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- 阶段指示器 -->
+                            <div class="mb-3">
+                                <span class="badge bg-light text-dark p-2" id="phase-indicator">
+                                    等待事务开始...
+                                </span>
+                            </div>
+                            
+                            <!-- 控制按钮 -->
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-primary" id="demo-start">
+                                    <i class="fas fa-play"></i> 开始演示
+                                </button>
+                                <button type="button" class="btn btn-warning" id="demo-pause" disabled>
+                                    <i class="fas fa-pause"></i> 暂停
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="demo-reset">
+                                    <i class="fas fa-redo"></i> 重置
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h6>协议步骤说明：</h6>
+                        <div id="protocol-steps">
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="0">
+                                <strong>初始化</strong><br>
+                                <small>准备分布式事务</small>
+                            </div>
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="1">
+                                <strong>阶段1：准备</strong><br>
+                                <small>协调器发送准备请求</small>
+                            </div>
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="2">
+                                <strong>阶段1：投票</strong><br>
+                                <small>参与者响应准备状态</small>
+                            </div>
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="3">
+                                <strong>阶段2：决策</strong><br>
+                                <small>协调器决定提交或回滚</small>
+                            </div>
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="4">
+                                <strong>阶段2：执行</strong><br>
+                                <small>参与者执行最终操作</small>
+                            </div>
+                            <div class="step-item mb-2 p-2 border-start border-3 border-secondary" data-step="5">
+                                <strong>完成</strong><br>
+                                <small>事务提交或回滚完成</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 事务测试工具 -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-vial"></i>
+                    事务测试工具
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="transaction-test-form">
+                    <div class="mb-3">
+                        <label class="form-label">测试场景</label>
+                        <select class="form-select" id="test-scenario">
+                            <option value="normal">正常转账</option>
+                            <option value="insufficient">余额不足</option>
+                            <option value="network-failure">网络故障模拟</option>
+                            <option value="participant-failure">参与者故障</option>
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">源账户</label>
+                                <input type="number" class="form-control" id="test-from-account" value="1001">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">目标账户</label>
+                                <input type="number" class="form-control" id="test-to-account" value="1002">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">转账金额</label>
+                        <input type="number" class="form-control" id="test-amount" step="0.01" value="100">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-flask"></i>
+                        执行测试
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-pie"></i>
+                    事务统计图表
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="transaction-chart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 事务日志 -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list"></i>
+                    详细事务日志
+                </h5>
+                <div>
+                    <button class="btn btn-sm btn-outline-light me-2" onclick="exportLogs()">
+                        <i class="fas fa-download"></i> 导出
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" onclick="clearTransactionLogs()">
+                        <i class="fas fa-trash"></i> 清空
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>事务ID</th>
+                                <th>类型</th>
+                                <th>状态</th>
+                                <th>参与者</th>
+                                <th>详情</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transaction-log-table">
+                            <tr>
+                                <td colspan="7" class="text-center">暂无事务记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let demoInterval;
+    let currentStep = 0;
+    let transactionChart;
+    
+    // 初始化图表
+    function initChart() {
+        const ctx = document.getElementById('transaction-chart').getContext('2d');
+        transactionChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['已提交', '已回滚', '活跃中'],
+                datasets: [{
+                    data: [0, 0, 0],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+    
+    // 2PC演示动画
+    function startDemo() {
+        const steps = [
+            { phase: "初始化事务", coordinator: "bg-primary", p1: "bg-secondary", p2: "bg-secondary" },
+            { phase: "阶段1：发送准备请求", coordinator: "bg-warning", p1: "bg-warning", p2: "bg-warning" },
+            { phase: "阶段1：参与者准备", coordinator: "bg-warning", p1: "bg-info", p2: "bg-info" },
+            { phase: "阶段1：收集投票结果", coordinator: "bg-info", p1: "bg-info", p2: "bg-info" },
+            { phase: "阶段2：发送提交请求", coordinator: "bg-success", p1: "bg-warning", p2: "bg-warning" },
+            { phase: "阶段2：执行提交", coordinator: "bg-success", p1: "bg-success", p2: "bg-success" },
+            { phase: "事务完成", coordinator: "bg-primary", p1: "bg-secondary", p2: "bg-secondary" }
+        ];
+        
+        currentStep = 0;
+        
+        demoInterval = setInterval(() => {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                
+                // 更新阶段指示器
+                document.getElementById('phase-indicator').textContent = step.phase;
+                
+                // 更新状态指示器
+                document.getElementById('coordinator-status').className = `badge ${step.coordinator} p-3 mb-2`;
+                document.getElementById('participant1-status').className = `badge ${step.p1} p-3 mb-2`;
+                document.getElementById('participant2-status').className = `badge ${step.p2} p-3 mb-2`;
+                
+                // 高亮当前步骤
+                document.querySelectorAll('.step-item').forEach((item, index) => {
+                    if (index === currentStep) {
+                        item.className = 'step-item mb-2 p-2 border-start border-3 border-primary bg-light';
+                    } else {
+                        item.className = 'step-item mb-2 p-2 border-start border-3 border-secondary';
+                    }
+                });
+                
+                currentStep++;
+            } else {
+                clearInterval(demoInterval);
+                document.getElementById('demo-start').disabled = false;
+                document.getElementById('demo-pause').disabled = true;
+                currentStep = 0;
+            }
+        }, 2000);
+        
+        document.getElementById('demo-start').disabled = true;
+        document.getElementById('demo-pause').disabled = false;
+    }
+    
+    // 暂停演示
+    function pauseDemo() {
+        clearInterval(demoInterval);
+        document.getElementById('demo-start').disabled = false;
+        document.getElementById('demo-pause').disabled = true;
+    }
+    
+    // 重置演示
+    function resetDemo() {
+        clearInterval(demoInterval);
+        currentStep = 0;
+        
+        document.getElementById('phase-indicator').textContent = '等待事务开始...';
+        document.getElementById('coordinator-status').className = 'badge bg-primary p-3 mb-2';
+        document.getElementById('participant1-status').className = 'badge bg-secondary p-3 mb-2';
+        document.getElementById('participant2-status').className = 'badge bg-secondary p-3 mb-2';
+        
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.className = 'step-item mb-2 p-2 border-start border-3 border-secondary';
+        });
+        
+        document.getElementById('demo-start').disabled = false;
+        document.getElementById('demo-pause').disabled = true;
+    }
+    
+    // 添加事务日志条目
+    function addTransactionLog(transactionId, type, status, participants, details) {
+        const table = document.getElementById('transaction-log-table');
+        
+        if (table.children.length === 1 && table.children[0].children.length === 1) {
+            table.innerHTML = '';
+        }
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${new Date().toLocaleString()}</td>
+            <td><code>${transactionId}</code></td>
+            <td><span class="badge bg-info">${type}</span></td>
+            <td><span class="badge bg-${status === 'COMMITTED' ? 'success' : status === 'ABORTED' ? 'danger' : 'warning'}">${status}</span></td>
+            <td>${participants}</td>
+            <td>${details}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="viewTransactionDetails('${transactionId}')">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </td>
+        `;
+        
+        table.insertBefore(row, table.firstChild);
+        
+        // 限制日志条目数量
+        while (table.children.length > 100) {
+            table.removeChild(table.lastChild);
+        }
+    }
+    
+    // 清空事务日志
+    function clearTransactionLogs() {
+        document.getElementById('transaction-log-table').innerHTML = 
+            '<tr><td colspan="7" class="text-center">暂无事务记录</td></tr>';
+    }
+    
+    // 导出日志
+    function exportLogs() {
+        // 这里可以实现日志导出功能
+        showMessage('日志导出功能开发中...', 'info');
+    }
+    
+    // 查看事务详情
+    function viewTransactionDetails(transactionId) {
+        showMessage(`查看事务 ${transactionId} 的详细信息`, 'info');
+    }
+    
+    // 更新统计数据
+    function updateStats() {
+        // 模拟统计数据
+        const committed = Math.floor(Math.random() * 50) + 20;
+        const aborted = Math.floor(Math.random() * 10) + 2;
+        const active = Math.floor(Math.random() * 5);
+        const total = committed + aborted + active;
+        
+        document.getElementById('total-transactions').textContent = total;
+        document.getElementById('committed-transactions').textContent = committed;
+        document.getElementById('aborted-transactions').textContent = aborted;
+        document.getElementById('active-transactions').textContent = active;
+        
+        // 更新图表
+        if (transactionChart) {
+            transactionChart.data.datasets[0].data = [committed, aborted, active];
+            transactionChart.update();
+        }
+    }
+    
+    // 事件监听器
+    document.getElementById('demo-start').addEventListener('click', startDemo);
+    document.getElementById('demo-pause').addEventListener('click', pauseDemo);
+    document.getElementById('demo-reset').addEventListener('click', resetDemo);
+    
+    // 事务测试表单
+    document.getElementById('transaction-test-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const scenario = document.getElementById('test-scenario').value;
+        const fromAccount = document.getElementById('test-from-account').value;
+        const toAccount = document.getElementById('test-to-account').value;
+        const amount = document.getElementById('test-amount').value;
+        
+        // 生成模拟事务ID
+        const transactionId = 'tx_' + Date.now();
+        
+        // 根据场景模拟不同结果
+        let status, details;
+        switch (scenario) {
+            case 'normal':
+                status = 'COMMITTED';
+                details = `正常转账: ${fromAccount} → ${toAccount}, ¥${amount}`;
+                break;
+            case 'insufficient':
+                status = 'ABORTED';
+                details = `余额不足: 账户 ${fromAccount}`;
+                break;
+            case 'network-failure':
+                status = 'ABORTED';
+                details = `网络故障: 无法连接到参与者`;
+                break;
+            case 'participant-failure':
+                status = 'ABORTED';
+                details = `参与者故障: 数据库2响应超时`;
+                break;
+        }
+        
+        // 添加到日志
+        addTransactionLog(transactionId, 'TRANSFER', status, 'DB1, DB2', details);
+        
+        // 显示结果消息
+        const messageType = status === 'COMMITTED' ? 'success' : 'error';
+        showMessage(`测试完成: ${details}`, messageType);
+        
+        // 更新统计
+        updateStats();
+    });
+    
+    // Socket.IO事件监听
+    socket.on('transfer_completed', function(data) {
+        const transactionId = 'tx_' + Date.now();
+        addTransactionLog(
+            transactionId, 
+            'TRANSFER', 
+            'COMMITTED', 
+            'DB1, DB2', 
+            `转账: ${data.from_account} → ${data.to_account}, ¥${data.amount}`
+        );
+        updateStats();
+    });
+    
+    socket.on('order_processed', function(data) {
+        const transactionId = 'tx_' + Date.now();
+        addTransactionLog(
+            transactionId, 
+            'ORDER', 
+            'COMMITTED', 
+            'DB1, DB2', 
+            `订单: 产品 ${data.product_id}, 数量 ${data.quantity}`
+        );
+        updateStats();
+    });
+    
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        initChart();
+        updateStats();
+        
+        // 定期更新统计数据
+        setInterval(updateStats, 10000);
+    });
+</script>
+{% endblock %}

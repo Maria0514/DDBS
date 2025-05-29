@@ -1,0 +1,881 @@
+2025-05-27 16:34:58,356 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3306: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-05-27 16:34:58,356 - database - ERROR - Failed to create connection pool for db1: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-05-27 16:35:02,453 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3307: 2003 (HY000): Can't connect to MySQL server on 'localhost:3307' (10061)
+2025-05-27 16:35:02,454 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3307' (10061)
+2025-05-27 16:35:02,456 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 16:35:02,718 - transaction - INFO - Transaction d312b7ce-f27b-4b4b-b715-63f888c3a109 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,724 - transaction - INFO - Transaction 720843eb-7bda-46de-944c-4dca40bcba8d started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,727 - transaction - INFO - Transaction 720843eb-7bda-46de-944c-4dca40bcba8d started successfully
+2025-05-27 16:35:02,728 - transaction - INFO - Transaction 1aafeb6a-a2fa-40dd-9d8d-c268cfa1cf22 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,729 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-27 16:35:02,731 - transaction - INFO - Transaction 35af7ec7-e3c2-495e-a2a4-63f85411a6f0 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,733 - transaction - INFO - Transaction 35af7ec7-e3c2-495e-a2a4-63f85411a6f0 prepare phase - Participant participant_1: SUCCESS
+2025-05-27 16:35:02,734 - transaction - INFO - Transaction 35af7ec7-e3c2-495e-a2a4-63f85411a6f0 prepare phase - Participant participant_2: SUCCESS
+2025-05-27 16:35:02,734 - transaction - INFO - Transaction 35af7ec7-e3c2-495e-a2a4-63f85411a6f0 prepared successfully
+2025-05-27 16:35:02,736 - transaction - INFO - Transaction 894f5635-7717-434d-9f1b-f8638b2609de started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,737 - transaction - INFO - Transaction 894f5635-7717-434d-9f1b-f8638b2609de prepare phase - Participant participant_1: FAILED
+2025-05-27 16:35:02,738 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-27 16:35:02,749 - transaction - INFO - Transaction 894f5635-7717-434d-9f1b-f8638b2609de ROLLBACK
+2025-05-27 16:35:02,751 - transaction - INFO - Transaction 894f5635-7717-434d-9f1b-f8638b2609de rolled back successfully
+2025-05-27 16:35:02,753 - transaction - INFO - Transaction 055206f6-4c0e-48e3-8047-b8129864c40b started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,754 - transaction - INFO - Transaction 055206f6-4c0e-48e3-8047-b8129864c40b COMMITTED
+2025-05-27 16:35:02,754 - transaction - INFO - Transaction 055206f6-4c0e-48e3-8047-b8129864c40b committed successfully
+2025-05-27 16:35:02,755 - transaction - INFO - Transaction 858aeb41-2ad3-4598-8265-b77963b91f6e started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,757 - transaction - INFO - Transaction 858aeb41-2ad3-4598-8265-b77963b91f6e ROLLBACK
+2025-05-27 16:35:02,757 - transaction - INFO - Transaction 858aeb41-2ad3-4598-8265-b77963b91f6e rolled back successfully
+2025-05-27 16:35:02,759 - transaction - INFO - Transaction e8a3f593-c865-4d71-8ce0-47434a2e8ecd started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,761 - transaction - INFO - Transaction 97a537b8-1242-467e-8900-25a4741e5bb2 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,763 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 16:35:02,764 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 16:35:02,764 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 16:35:02,766 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 16:35:02,767 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 16:35:02,768 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 16:35:02,769 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 16:35:02,771 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 16:35:02,772 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 16:35:02,773 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 16:35:02,774 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 16:35:02,777 - system - INFO - BankingService: Account 1001 created with balance 1000.0
+2025-05-27 16:35:02,780 - system - ERROR - System error in BankingService.create_account: Database error
+2025-05-27 16:35:02,788 - transaction - INFO - Transaction a6022967-0169-490e-bf63-c9ff42f84e93 started with participants: ['participant_1', 'participant_2', 'participant_3', 'participant_4', 'participant_5', 'participant_6', 'participant_7', 'participant_8', 'participant_9', 'participant_10']
+2025-05-27 16:35:02,789 - transaction - INFO - Transaction a6022967-0169-490e-bf63-c9ff42f84e93 started successfully
+2025-05-27 16:35:02,791 - transaction - INFO - Transaction 8cedb74b-0bca-49aa-92fb-b84606675f0a started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,792 - transaction - INFO - Transaction e5b373b1-1fd7-455a-9181-f08b6f12f4e8 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,792 - transaction - INFO - Transaction 619a97b7-a2f0-441b-8aff-6fdd2b1ee87f started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,792 - transaction - INFO - Transaction 7999f19c-db63-4a98-8672-8a90f9a65996 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,793 - transaction - INFO - Transaction 82582a8e-46ab-49df-a058-7bcc6fb9ec12 started with participants: ['participant_1', 'participant_2']
+2025-05-27 16:35:02,794 - transaction - INFO - Transaction 8cedb74b-0bca-49aa-92fb-b84606675f0a started successfully
+2025-05-27 16:35:02,794 - transaction - INFO - Transaction e5b373b1-1fd7-455a-9181-f08b6f12f4e8 started successfully
+2025-05-27 16:35:02,795 - transaction - INFO - Transaction 619a97b7-a2f0-441b-8aff-6fdd2b1ee87f started successfully
+2025-05-27 16:35:02,796 - transaction - INFO - Transaction 7999f19c-db63-4a98-8672-8a90f9a65996 started successfully
+2025-05-27 16:35:02,796 - transaction - INFO - Transaction 82582a8e-46ab-49df-a058-7bcc6fb9ec12 started successfully
+2025-05-27 16:44:23,859 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 1/30)
+2025-05-27 16:44:25,867 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 2/30)
+2025-05-27 16:44:27,876 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 3/30)
+2025-05-27 16:44:29,884 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 4/30)
+2025-05-27 16:44:31,911 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 5/30)
+2025-05-27 16:44:33,936 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 6/30)
+2025-05-27 16:44:35,944 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 7/30)
+2025-05-27 16:44:37,972 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 8/30)
+2025-05-27 16:44:39,990 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 9/30)
+2025-05-27 16:44:41,998 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 10/30)
+2025-05-27 16:44:44,006 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 11/30)
+2025-05-27 16:44:46,024 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 12/30)
+2025-05-27 16:44:48,034 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 13/30)
+2025-05-27 16:44:50,063 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 14/30)
+2025-05-27 16:44:52,068 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 15/30)
+2025-05-27 16:44:54,099 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 16/30)
+2025-05-27 16:44:56,118 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 17/30)
+2025-05-27 16:44:58,126 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 18/30)
+2025-05-27 16:45:00,133 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 19/30)
+2025-05-27 16:45:02,165 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 20/30)
+2025-05-27 16:45:04,174 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 21/30)
+2025-05-27 16:45:06,203 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 22/30)
+2025-05-27 16:45:08,211 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 23/30)
+2025-05-27 16:45:10,218 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 24/30)
+2025-05-27 16:45:12,226 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 25/30)
+2025-05-27 16:45:14,235 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 26/30)
+2025-05-27 16:45:16,243 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 27/30)
+2025-05-27 16:45:18,253 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 28/30)
+2025-05-27 16:45:20,262 - system - INFO - DatabaseInit: Waiting for database localhost:3306 (attempt 29/30)
+2025-05-27 16:45:22,271 - system - ERROR - System error in DatabaseInit: Failed to connect to database localhost:3306 after 30 attempts: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-05-27 16:45:26,344 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 1/30)
+2025-05-27 16:45:32,427 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 2/30)
+2025-05-27 16:45:38,539 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 3/30)
+2025-05-27 16:45:44,636 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 4/30)
+2025-05-27 16:45:50,718 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 5/30)
+2025-05-27 16:45:56,825 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 6/30)
+2025-05-27 16:46:02,917 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 7/30)
+2025-05-27 16:46:09,020 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 8/30)
+2025-05-27 16:46:15,094 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 9/30)
+2025-05-27 16:46:21,192 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 10/30)
+2025-05-27 16:46:27,285 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 11/30)
+2025-05-27 16:46:33,378 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 12/30)
+2025-05-27 16:46:39,488 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 13/30)
+2025-05-27 16:46:45,577 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 14/30)
+2025-05-27 16:46:51,669 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 15/30)
+2025-05-27 16:46:57,766 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 16/30)
+2025-05-27 16:47:03,863 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 17/30)
+2025-05-27 16:47:09,933 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 18/30)
+2025-05-27 16:47:16,044 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 19/30)
+2025-05-27 16:47:22,153 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 20/30)
+2025-05-27 16:47:28,228 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 21/30)
+2025-05-27 16:47:34,318 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 22/30)
+2025-05-27 16:47:40,405 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 23/30)
+2025-05-27 16:47:46,523 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 24/30)
+2025-05-27 16:47:52,623 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 25/30)
+2025-05-27 16:47:58,726 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 26/30)
+2025-05-27 16:48:04,800 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 27/30)
+2025-05-27 16:48:10,892 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 28/30)
+2025-05-27 16:48:16,963 - system - INFO - DatabaseInit: Waiting for database localhost:3307 (attempt 29/30)
+2025-05-27 16:48:23,061 - system - ERROR - System error in DatabaseInit: Failed to connect to database localhost:3307 after 30 attempts: 2003 (HY000): Can't connect to MySQL server on 'localhost:3307' (10061)
+2025-05-27 17:52:54,373 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-27 17:52:54,569 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-27 17:52:54,600 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-27 17:52:54,916 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-27 17:52:54,980 - system - INFO - DatabaseInit: Database verification completed - Accounts: 5, Products: 5
+2025-05-27 18:08:42,369 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-27 18:08:42,410 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-27 18:08:42,435 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-27 18:08:42,480 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-27 18:08:42,510 - system - INFO - DatabaseInit: Database verification completed - Accounts: 5, Products: 5
+2025-05-27 18:08:47,012 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 18:08:47,134 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 18:08:47,135 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:47,217 - transaction - INFO - Transaction f36cb98f-81e6-4e4e-905c-37af967106b7 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,274 - transaction - INFO - Transaction f55ffebc-3ed2-4526-ae36-90c26d8418b9 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,290 - transaction - INFO - Transaction f55ffebc-3ed2-4526-ae36-90c26d8418b9 started successfully
+2025-05-27 18:08:47,292 - transaction - INFO - Transaction 77681ec2-7ede-4c8c-8707-85472f9b1d86 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,293 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-27 18:08:47,307 - transaction - INFO - Transaction c6449625-ac9e-406a-921b-670e05978d11 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,308 - transaction - INFO - Transaction c6449625-ac9e-406a-921b-670e05978d11 prepare phase - Participant participant_1: SUCCESS
+2025-05-27 18:08:47,309 - transaction - INFO - Transaction c6449625-ac9e-406a-921b-670e05978d11 prepare phase - Participant participant_2: SUCCESS
+2025-05-27 18:08:47,310 - transaction - INFO - Transaction c6449625-ac9e-406a-921b-670e05978d11 prepared successfully
+2025-05-27 18:08:47,311 - transaction - INFO - Transaction 9481e2a4-4480-4820-861f-7cec705b8acb started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,312 - transaction - INFO - Transaction 9481e2a4-4480-4820-861f-7cec705b8acb prepare phase - Participant participant_1: FAILED
+2025-05-27 18:08:47,313 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-27 18:08:47,314 - transaction - INFO - Transaction 9481e2a4-4480-4820-861f-7cec705b8acb ROLLBACK
+2025-05-27 18:08:47,315 - transaction - INFO - Transaction 9481e2a4-4480-4820-861f-7cec705b8acb rolled back successfully
+2025-05-27 18:08:47,316 - transaction - INFO - Transaction a65e4aa8-c769-4134-b7d5-ccde20293a59 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,317 - transaction - INFO - Transaction a65e4aa8-c769-4134-b7d5-ccde20293a59 COMMITTED
+2025-05-27 18:08:47,317 - transaction - INFO - Transaction a65e4aa8-c769-4134-b7d5-ccde20293a59 committed successfully
+2025-05-27 18:08:47,319 - transaction - INFO - Transaction 209b0ebc-8eaf-40bd-a6a7-4664665baddb started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,320 - transaction - INFO - Transaction 209b0ebc-8eaf-40bd-a6a7-4664665baddb ROLLBACK
+2025-05-27 18:08:47,320 - transaction - INFO - Transaction 209b0ebc-8eaf-40bd-a6a7-4664665baddb rolled back successfully
+2025-05-27 18:08:47,321 - transaction - INFO - Transaction 45d6185b-87d8-442b-8888-9c43e2a389f8 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,323 - transaction - INFO - Transaction 5109b5c0-5651-4a8d-855a-4baa05178f18 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,325 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:47,326 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:47,327 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:47,329 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:47,329 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:47,330 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:47,331 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:08:47,334 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:47,334 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:47,335 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:47,336 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:08:47,338 - system - INFO - BankingService: Account 1001 created with balance 1000.0
+2025-05-27 18:08:47,340 - system - ERROR - System error in BankingService.create_account: Database error
+2025-05-27 18:08:47,346 - transaction - INFO - Transaction 82e0bb2d-df65-48a7-8080-57b4544aaf8b started with participants: ['participant_1', 'participant_2', 'participant_3', 'participant_4', 'participant_5', 'participant_6', 'participant_7', 'participant_8', 'participant_9', 'participant_10']
+2025-05-27 18:08:47,347 - transaction - INFO - Transaction 82e0bb2d-df65-48a7-8080-57b4544aaf8b started successfully
+2025-05-27 18:08:47,349 - transaction - INFO - Transaction becf68a9-2540-4441-8840-8c24bb14ebda started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,350 - transaction - INFO - Transaction 00bc7e0c-58e6-4a1b-99da-6846a881b508 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,350 - transaction - INFO - Transaction 6d921b56-5f06-4990-ad88-c6a023018eee started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,350 - transaction - INFO - Transaction 7b078c53-eacd-43b1-b049-33d0c7fb5291 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,351 - transaction - INFO - Transaction e34f8053-3a7e-4963-9b74-508b7082cf5a started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:47,367 - transaction - INFO - Transaction becf68a9-2540-4441-8840-8c24bb14ebda started successfully
+2025-05-27 18:08:47,368 - transaction - INFO - Transaction 00bc7e0c-58e6-4a1b-99da-6846a881b508 started successfully
+2025-05-27 18:08:47,368 - transaction - INFO - Transaction 6d921b56-5f06-4990-ad88-c6a023018eee started successfully
+2025-05-27 18:08:47,370 - transaction - INFO - Transaction 7b078c53-eacd-43b1-b049-33d0c7fb5291 started successfully
+2025-05-27 18:08:47,371 - transaction - INFO - Transaction e34f8053-3a7e-4963-9b74-508b7082cf5a started successfully
+2025-05-27 18:08:54,817 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 18:08:54,941 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 18:08:54,942 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:54,994 - transaction - INFO - Transaction 36b4da90-4569-496f-96b5-1cd9069ed857 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,000 - transaction - INFO - Transaction 67529274-7e4c-4aae-88ec-b3e248b21205 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,010 - transaction - INFO - Transaction 67529274-7e4c-4aae-88ec-b3e248b21205 started successfully
+2025-05-27 18:08:55,012 - transaction - INFO - Transaction 7cd9ac70-1e75-4bef-82c0-c67ed381e58a started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,013 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-27 18:08:55,016 - transaction - INFO - Transaction 60a4643c-2941-4aea-9b9a-2e07562189db started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,017 - transaction - INFO - Transaction 60a4643c-2941-4aea-9b9a-2e07562189db prepare phase - Participant participant_1: SUCCESS
+2025-05-27 18:08:55,018 - transaction - INFO - Transaction 60a4643c-2941-4aea-9b9a-2e07562189db prepare phase - Participant participant_2: SUCCESS
+2025-05-27 18:08:55,018 - transaction - INFO - Transaction 60a4643c-2941-4aea-9b9a-2e07562189db prepared successfully
+2025-05-27 18:08:55,019 - transaction - INFO - Transaction dd7edb5e-d238-44a2-a8a9-d8f3e180424d started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,020 - transaction - INFO - Transaction dd7edb5e-d238-44a2-a8a9-d8f3e180424d prepare phase - Participant participant_1: FAILED
+2025-05-27 18:08:55,021 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-27 18:08:55,022 - transaction - INFO - Transaction dd7edb5e-d238-44a2-a8a9-d8f3e180424d ROLLBACK
+2025-05-27 18:08:55,022 - transaction - INFO - Transaction dd7edb5e-d238-44a2-a8a9-d8f3e180424d rolled back successfully
+2025-05-27 18:08:55,024 - transaction - INFO - Transaction 82c7e4f6-5ad4-40cb-9ab0-ccdb9b38855f started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,025 - transaction - INFO - Transaction 82c7e4f6-5ad4-40cb-9ab0-ccdb9b38855f COMMITTED
+2025-05-27 18:08:55,026 - transaction - INFO - Transaction 82c7e4f6-5ad4-40cb-9ab0-ccdb9b38855f committed successfully
+2025-05-27 18:08:55,027 - transaction - INFO - Transaction 3e1adfee-ad1c-4a62-a290-e6632cc2d568 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,028 - transaction - INFO - Transaction 3e1adfee-ad1c-4a62-a290-e6632cc2d568 ROLLBACK
+2025-05-27 18:08:55,029 - transaction - INFO - Transaction 3e1adfee-ad1c-4a62-a290-e6632cc2d568 rolled back successfully
+2025-05-27 18:08:55,030 - transaction - INFO - Transaction 0020fd99-fa02-4981-8685-f7deeccc78f1 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,032 - transaction - INFO - Transaction c78f6532-8f75-4f32-b366-d1651b4e5290 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,035 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:55,036 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:55,037 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:55,039 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:55,039 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:55,040 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:55,041 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:08:55,043 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:08:55,043 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:08:55,044 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:08:55,045 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:08:55,048 - system - INFO - BankingService: Account 1001 created with balance 1000.0
+2025-05-27 18:08:55,050 - system - ERROR - System error in BankingService.create_account: Database error
+2025-05-27 18:08:55,056 - transaction - INFO - Transaction e97a877b-1033-48da-a866-5e16cf4f2123 started with participants: ['participant_1', 'participant_2', 'participant_3', 'participant_4', 'participant_5', 'participant_6', 'participant_7', 'participant_8', 'participant_9', 'participant_10']
+2025-05-27 18:08:55,058 - transaction - INFO - Transaction e97a877b-1033-48da-a866-5e16cf4f2123 started successfully
+2025-05-27 18:08:55,059 - transaction - INFO - Transaction 5fbd3426-6ef4-4ae7-87df-6eddc879aad9 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,059 - transaction - INFO - Transaction 71c5acbc-c9f8-478c-af57-c84cee5a54e6 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,059 - transaction - INFO - Transaction 89f50699-8680-4a05-b2f8-254ab1635aa3 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,060 - transaction - INFO - Transaction ae28125a-a328-415d-8ec2-d702d5547aaa started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,060 - transaction - INFO - Transaction ecf0445e-f2fb-45a8-945e-8714ff4401c2 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:08:55,061 - transaction - INFO - Transaction 5fbd3426-6ef4-4ae7-87df-6eddc879aad9 started successfully
+2025-05-27 18:08:55,062 - transaction - INFO - Transaction 71c5acbc-c9f8-478c-af57-c84cee5a54e6 started successfully
+2025-05-27 18:08:55,063 - transaction - INFO - Transaction 89f50699-8680-4a05-b2f8-254ab1635aa3 started successfully
+2025-05-27 18:08:55,064 - transaction - INFO - Transaction ae28125a-a328-415d-8ec2-d702d5547aaa started successfully
+2025-05-27 18:08:55,065 - transaction - INFO - Transaction ecf0445e-f2fb-45a8-945e-8714ff4401c2 started successfully
+2025-05-27 18:19:17,845 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 18:19:17,936 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 18:19:17,937 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:19:17,949 - system - INFO - BankingService: Account 9999 created with balance 100.0
+2025-05-27 18:19:17,954 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 18:23:12,891 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-27 18:23:12,932 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-27 18:23:12,960 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-27 18:23:12,994 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-27 18:23:13,054 - system - INFO - DatabaseInit: Database verification completed - Accounts: 6, Products: 5
+2025-05-27 18:23:16,262 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 18:23:16,323 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 18:23:16,324 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:23:16,375 - transaction - INFO - Transaction 5f90eb97-76f8-4ace-8a78-7b59d3fba7a5 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,382 - transaction - INFO - Transaction 5bdacf43-7c51-4bed-bfc7-720b08c7139c started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,392 - transaction - INFO - Transaction 5bdacf43-7c51-4bed-bfc7-720b08c7139c started successfully
+2025-05-27 18:23:16,394 - transaction - INFO - Transaction e05bacdf-51e2-48f0-b5fd-0bfd27f8ad08 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,394 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-27 18:23:16,397 - transaction - INFO - Transaction 925dc19f-bdd5-4f1b-b4eb-0bfbed2ea6d9 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,398 - transaction - INFO - Transaction 925dc19f-bdd5-4f1b-b4eb-0bfbed2ea6d9 prepare phase - Participant participant_1: SUCCESS
+2025-05-27 18:23:16,398 - transaction - INFO - Transaction 925dc19f-bdd5-4f1b-b4eb-0bfbed2ea6d9 prepare phase - Participant participant_2: SUCCESS
+2025-05-27 18:23:16,399 - transaction - INFO - Transaction 925dc19f-bdd5-4f1b-b4eb-0bfbed2ea6d9 prepared successfully
+2025-05-27 18:23:16,400 - transaction - INFO - Transaction 5b80f9ff-1850-41b5-9aa6-0604aa97e7ab started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,401 - transaction - INFO - Transaction 5b80f9ff-1850-41b5-9aa6-0604aa97e7ab prepare phase - Participant participant_1: FAILED
+2025-05-27 18:23:16,402 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-27 18:23:16,403 - transaction - INFO - Transaction 5b80f9ff-1850-41b5-9aa6-0604aa97e7ab ROLLBACK
+2025-05-27 18:23:16,403 - transaction - INFO - Transaction 5b80f9ff-1850-41b5-9aa6-0604aa97e7ab rolled back successfully
+2025-05-27 18:23:16,405 - transaction - INFO - Transaction 66680319-34fc-4fc7-9d3c-ff09a8c9fefd started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,406 - transaction - INFO - Transaction 66680319-34fc-4fc7-9d3c-ff09a8c9fefd COMMITTED
+2025-05-27 18:23:16,406 - transaction - INFO - Transaction 66680319-34fc-4fc7-9d3c-ff09a8c9fefd committed successfully
+2025-05-27 18:23:16,408 - transaction - INFO - Transaction 53db45da-1412-406c-93b6-bdc1001573ae started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,409 - transaction - INFO - Transaction 53db45da-1412-406c-93b6-bdc1001573ae ROLLBACK
+2025-05-27 18:23:16,409 - transaction - INFO - Transaction 53db45da-1412-406c-93b6-bdc1001573ae rolled back successfully
+2025-05-27 18:23:16,410 - transaction - INFO - Transaction 0564af89-d4b7-48db-9312-efaf9d24667f started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,413 - transaction - INFO - Transaction 481c790f-f5bf-41eb-b692-1eb7114c2cc7 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,416 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:23:16,416 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:23:16,417 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:23:16,419 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:23:16,420 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:23:16,420 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:23:16,421 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:23:16,423 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:23:16,423 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:23:16,424 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:23:16,425 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:23:16,427 - system - INFO - BankingService: Account 1001 created with balance 1000.0
+2025-05-27 18:23:16,429 - system - ERROR - System error in BankingService.create_account: Database error: Database error
+2025-05-27 18:23:16,435 - transaction - INFO - Transaction be6ab409-7cc7-45a1-b467-afa238b50f74 started with participants: ['participant_1', 'participant_2', 'participant_3', 'participant_4', 'participant_5', 'participant_6', 'participant_7', 'participant_8', 'participant_9', 'participant_10']
+2025-05-27 18:23:16,436 - transaction - INFO - Transaction be6ab409-7cc7-45a1-b467-afa238b50f74 started successfully
+2025-05-27 18:23:16,438 - transaction - INFO - Transaction c4534fd8-799a-4b7e-ae64-81f0775f32c6 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,438 - transaction - INFO - Transaction acaed0d0-088d-4fbe-86d7-95b13ffcbea2 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,439 - transaction - INFO - Transaction 86536574-f8f0-4c60-ada9-55249d3ca2e4 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,439 - transaction - INFO - Transaction 321f5109-6678-4439-83ba-58f8afb959ec started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,439 - transaction - INFO - Transaction c45aa069-7d34-49f9-9b30-ca19907e53ba started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:23:16,441 - transaction - INFO - Transaction c4534fd8-799a-4b7e-ae64-81f0775f32c6 started successfully
+2025-05-27 18:23:16,441 - transaction - INFO - Transaction acaed0d0-088d-4fbe-86d7-95b13ffcbea2 started successfully
+2025-05-27 18:23:16,442 - transaction - INFO - Transaction 86536574-f8f0-4c60-ada9-55249d3ca2e4 started successfully
+2025-05-27 18:23:16,444 - transaction - INFO - Transaction 321f5109-6678-4439-83ba-58f8afb959ec started successfully
+2025-05-27 18:23:16,445 - transaction - INFO - Transaction c45aa069-7d34-49f9-9b30-ca19907e53ba started successfully
+2025-05-27 18:32:31,383 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 18:32:31,475 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 18:32:31,476 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:32:31,498 - system - INFO - BankingService: Account 8888 created with balance 200.0
+2025-05-27 18:32:31,503 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 18:47:53,951 - transaction - INFO - Transaction b04a7c04-a8cd-415f-92a6-d3e5adb0add7 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,965 - transaction - INFO - Transaction bc914aef-b26a-4c5d-af59-97f5e4e63a6f started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,966 - transaction - INFO - Transaction bc914aef-b26a-4c5d-af59-97f5e4e63a6f started successfully
+2025-05-27 18:47:53,968 - transaction - INFO - Transaction 0aa09137-ed31-4373-bc98-467d4b059ce5 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,969 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-27 18:47:53,980 - transaction - INFO - Transaction b88573e7-3c17-471e-9f8f-55bbcf2b96b2 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,981 - transaction - INFO - Transaction b88573e7-3c17-471e-9f8f-55bbcf2b96b2 prepare phase - Participant participant_1: SUCCESS
+2025-05-27 18:47:53,982 - transaction - INFO - Transaction b88573e7-3c17-471e-9f8f-55bbcf2b96b2 prepare phase - Participant participant_2: SUCCESS
+2025-05-27 18:47:53,982 - transaction - INFO - Transaction b88573e7-3c17-471e-9f8f-55bbcf2b96b2 prepared successfully
+2025-05-27 18:47:53,984 - transaction - INFO - Transaction 6063224d-d6c9-486d-b17f-c8ab67d27458 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,985 - transaction - INFO - Transaction 6063224d-d6c9-486d-b17f-c8ab67d27458 prepare phase - Participant participant_1: FAILED
+2025-05-27 18:47:53,986 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-27 18:47:53,987 - transaction - INFO - Transaction 6063224d-d6c9-486d-b17f-c8ab67d27458 ROLLBACK
+2025-05-27 18:47:53,988 - transaction - INFO - Transaction 6063224d-d6c9-486d-b17f-c8ab67d27458 rolled back successfully
+2025-05-27 18:47:53,989 - transaction - INFO - Transaction de381328-d413-407b-a423-3c264ed0f542 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,990 - transaction - INFO - Transaction de381328-d413-407b-a423-3c264ed0f542 COMMITTED
+2025-05-27 18:47:53,991 - transaction - INFO - Transaction de381328-d413-407b-a423-3c264ed0f542 committed successfully
+2025-05-27 18:47:53,992 - transaction - INFO - Transaction 7ac9d034-a377-4332-969f-2d287e271a2a started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,993 - transaction - INFO - Transaction 7ac9d034-a377-4332-969f-2d287e271a2a ROLLBACK
+2025-05-27 18:47:53,994 - transaction - INFO - Transaction 7ac9d034-a377-4332-969f-2d287e271a2a rolled back successfully
+2025-05-27 18:47:53,995 - transaction - INFO - Transaction 10c2c4ea-95e5-4818-b344-34ad73afe4c6 started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,996 - transaction - INFO - Transaction 61d33932-ce48-45f8-bb67-5dc2d903e9eb started with participants: ['participant_1', 'participant_2']
+2025-05-27 18:47:53,998 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:47:53,999 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:47:54,000 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:47:54,002 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:47:54,003 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:47:54,004 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:47:54,005 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 18:47:54,007 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-27 18:47:54,007 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-27 18:47:54,008 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 18:47:54,009 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-27 19:02:19,787 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 19:02:19,902 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 19:02:19,902 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 19:02:19,904 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 started with participants: ['participant_1', 'participant_2']
+2025-05-27 19:02:19,906 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 started successfully
+2025-05-27 19:02:19,907 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 prepare phase - Participant participant_1: SUCCESS
+2025-05-27 19:02:19,909 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 prepare phase - Participant participant_2: SUCCESS
+2025-05-27 19:02:19,909 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 prepared successfully
+2025-05-27 19:02:19,911 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 COMMITTED
+2025-05-27 19:02:19,911 - transaction - INFO - Transaction 3d9e092a-6369-4246-b8a7-40e1734f6dd3 committed successfully
+2025-05-27 19:06:41,446 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 19:06:41,592 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 19:06:41,592 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 19:06:41,613 - system - INFO - BankingService: Account 7777 created with balance 1000.0
+2025-05-27 19:06:41,617 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 19:06:41,622 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '8888' for key 'accounts.PRIMARY'
+2025-05-27 19:06:41,625 - transaction - INFO - Transaction 77a8b2d4-8450-4c0a-a2d5-cf1350656931 started with participants: ['participant_1', 'participant_2']
+2025-05-27 19:06:41,628 - transaction - INFO - Transaction 77a8b2d4-8450-4c0a-a2d5-cf1350656931 started successfully
+2025-05-27 19:06:41,632 - system - ERROR - System error in BankingService.transfer_money: unsupported operand type(s) for -: 'decimal.Decimal' and 'float'
+2025-05-27 19:06:41,636 - transaction - INFO - Transaction 77a8b2d4-8450-4c0a-a2d5-cf1350656931 ROLLBACK
+2025-05-27 19:06:41,636 - transaction - INFO - Transaction 77a8b2d4-8450-4c0a-a2d5-cf1350656931 rolled back successfully
+2025-05-27 19:06:41,642 - transaction - INFO - Transaction a00df7c5-053b-4b53-9d8e-b99c2536d3cf started with participants: ['participant_1', 'participant_2']
+2025-05-27 19:06:41,644 - transaction - INFO - Transaction a00df7c5-053b-4b53-9d8e-b99c2536d3cf started successfully
+2025-05-27 19:06:41,646 - system - ERROR - System error in BankingService.transfer_money: Insufficient balance. Available: 200.00, Required: 1000.0
+2025-05-27 19:06:41,649 - transaction - INFO - Transaction a00df7c5-053b-4b53-9d8e-b99c2536d3cf ROLLBACK
+2025-05-27 19:06:41,650 - transaction - INFO - Transaction a00df7c5-053b-4b53-9d8e-b99c2536d3cf rolled back successfully
+2025-05-27 19:08:29,418 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-27 19:08:29,526 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-27 19:08:29,526 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-27 19:08:29,528 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '7777' for key 'accounts.PRIMARY'
+2025-05-27 19:08:29,532 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 19:08:29,536 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '8888' for key 'accounts.PRIMARY'
+2025-05-27 19:08:29,539 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df started with participants: ['participant_1', 'participant_2']
+2025-05-27 19:08:29,541 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df started successfully
+2025-05-27 19:08:29,571 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df prepare phase - Participant participant_1: SUCCESS
+2025-05-27 19:08:29,589 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df prepare phase - Participant participant_2: SUCCESS
+2025-05-27 19:08:29,589 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df prepared successfully
+2025-05-27 19:08:29,607 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df COMMITTED
+2025-05-27 19:08:29,607 - transaction - INFO - Transaction 816ccc81-ec80-4698-aeb3-e67d92e5d0df committed successfully
+2025-05-27 19:08:29,609 - system - INFO - BankingService: Transfer successful: 7777 -> 8888, Amount: 200.0
+2025-05-27 19:08:29,615 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 19:08:29,619 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-27 19:08:29,623 - transaction - INFO - Transaction 9f2643f3-7994-41ac-9d82-128c7616a87d started with participants: ['participant_1', 'participant_2']
+2025-05-27 19:08:29,625 - transaction - INFO - Transaction 9f2643f3-7994-41ac-9d82-128c7616a87d started successfully
+2025-05-27 19:08:29,627 - system - ERROR - System error in BankingService.transfer_money: Insufficient balance. Available: 400.00, Required: 1000.0
+2025-05-27 19:08:29,631 - transaction - INFO - Transaction 9f2643f3-7994-41ac-9d82-128c7616a87d ROLLBACK
+2025-05-27 19:08:29,632 - transaction - INFO - Transaction 9f2643f3-7994-41ac-9d82-128c7616a87d rolled back successfully
+2025-05-28 23:22:51,880 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3316: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:22:51,881 - database - ERROR - Failed to create connection pool for db1: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:22:55,940 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3317: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:22:55,940 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:22:55,941 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:23:07,510 - web - INFO - Web request - GET / - Status: 200
+2025-05-28 23:24:34,935 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3316: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:24:34,936 - database - ERROR - Failed to create connection pool for db1: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:24:38,999 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3317: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:24:39,000 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:24:39,000 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:25:36,584 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3316: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:25:36,584 - database - ERROR - Failed to create connection pool for db1: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:25:40,691 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3317: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:25:40,691 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:25:40,692 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:25:59,962 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3316: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:25:59,962 - database - ERROR - Failed to create connection pool for db1: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:26:04,038 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3317: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:26:04,038 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:26:04,039 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:29:41,444 - database - ERROR - Database connection Connection pool creation failed for node db1 FAILED - localhost:3316: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:29:41,444 - database - ERROR - Failed to create connection pool for db1: 2003 (HY000): Can't connect to MySQL server on 'localhost:3316' (10061)
+2025-05-28 23:29:45,529 - database - ERROR - Database connection Connection pool creation failed for node db2 FAILED - localhost:3317: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:29:45,529 - database - ERROR - Failed to create connection pool for db2: 2003 (HY000): Can't connect to MySQL server on 'localhost:3317' (10061)
+2025-05-28 23:29:45,529 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:30:05,414 - database - WARNING - Health check failed for db1: Database node db1 is not available
+2025-05-28 23:30:05,415 - database - WARNING - Health check failed for db2: Database node db2 is not available
+2025-05-28 23:31:27,581 - database - WARNING - Health check failed for db1: Database node db1 is not available
+2025-05-28 23:31:27,581 - database - WARNING - Health check failed for db2: Database node db2 is not available
+2025-05-28 23:31:29,739 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:31:31,571 - system - ERROR - System error in BankingService.create_account: Database error: Database node db1 is not available
+2025-05-28 23:32:19,623 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-28 23:32:19,664 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-28 23:32:19,674 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-28 23:32:19,718 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-28 23:32:19,766 - system - INFO - DatabaseInit: Database verification completed - Accounts: 8, Products: 5
+2025-05-28 23:32:43,050 - transaction - INFO - Transaction 09c54a38-f0e2-489c-9c78-d3e2a9be833e started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,144 - transaction - INFO - Transaction edb658e7-800d-4eda-8c33-65cebbd2f49a started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,146 - transaction - INFO - Transaction edb658e7-800d-4eda-8c33-65cebbd2f49a started successfully
+2025-05-28 23:32:43,147 - transaction - INFO - Transaction 49010a5b-1990-41b1-a450-c0e38a49ac53 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,148 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-28 23:32:43,173 - transaction - INFO - Transaction 2c0bbe3d-2a23-4681-932b-7492a82f8320 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,174 - transaction - INFO - Transaction 2c0bbe3d-2a23-4681-932b-7492a82f8320 prepare phase - Participant participant_1: SUCCESS
+2025-05-28 23:32:43,174 - transaction - INFO - Transaction 2c0bbe3d-2a23-4681-932b-7492a82f8320 prepare phase - Participant participant_2: SUCCESS
+2025-05-28 23:32:43,175 - transaction - INFO - Transaction 2c0bbe3d-2a23-4681-932b-7492a82f8320 prepared successfully
+2025-05-28 23:32:43,176 - transaction - INFO - Transaction 571ffa5c-58a4-45b5-a6d7-a6d9271a64e5 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,177 - transaction - INFO - Transaction 571ffa5c-58a4-45b5-a6d7-a6d9271a64e5 prepare phase - Participant participant_1: FAILED
+2025-05-28 23:32:43,178 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-28 23:32:43,179 - transaction - INFO - Transaction 571ffa5c-58a4-45b5-a6d7-a6d9271a64e5 ROLLBACK
+2025-05-28 23:32:43,180 - transaction - INFO - Transaction 571ffa5c-58a4-45b5-a6d7-a6d9271a64e5 rolled back successfully
+2025-05-28 23:32:43,181 - transaction - INFO - Transaction 2807fab7-8975-4a12-b5aa-924630870f14 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,182 - transaction - INFO - Transaction 2807fab7-8975-4a12-b5aa-924630870f14 COMMITTED
+2025-05-28 23:32:43,183 - transaction - INFO - Transaction 2807fab7-8975-4a12-b5aa-924630870f14 committed successfully
+2025-05-28 23:32:43,184 - transaction - INFO - Transaction 5e990a0e-9954-4250-9f67-e5a90e0b9876 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,185 - transaction - INFO - Transaction 5e990a0e-9954-4250-9f67-e5a90e0b9876 ROLLBACK
+2025-05-28 23:32:43,185 - transaction - INFO - Transaction 5e990a0e-9954-4250-9f67-e5a90e0b9876 rolled back successfully
+2025-05-28 23:32:43,188 - transaction - INFO - Transaction 2d27640c-6d39-4c5e-9577-2f03aab96605 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,189 - transaction - INFO - Transaction fc479570-ddea-43f3-9e5b-2e65d6778b38 started with participants: ['participant_1', 'participant_2']
+2025-05-28 23:32:43,191 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-28 23:32:43,192 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-28 23:32:43,192 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:32:43,194 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-28 23:32:43,195 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-28 23:32:43,195 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:32:43,196 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-28 23:32:43,198 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-28 23:32:43,199 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-28 23:32:43,199 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:32:43,200 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-28 23:32:46,502 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-28 23:32:46,513 - database - WARNING - Health check failed for db1: Database node db1 is not available
+2025-05-28 23:32:46,514 - database - WARNING - Health check failed for db2: Database node db2 is not available
+2025-05-28 23:32:46,610 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-28 23:32:46,610 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:32:48,747 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:32:50,381 - system - ERROR - System error in BankingService.create_account: Database error: Database node db1 is not available
+2025-05-28 23:32:51,737 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:32:59,820 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:39:22,564 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-28 23:39:22,720 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-28 23:39:22,720 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:39:22,731 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-28 23:40:26,674 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:40:28,348 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:40:30,546 - database - WARNING - Health check failed for db1: Database node db1 is not available
+2025-05-28 23:40:30,546 - database - WARNING - Health check failed for db2: Database node db2 is not available
+2025-05-28 23:40:31,274 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:40:32,528 - system - ERROR - System error in BankingService.create_account: Database error: Database node db1 is not available
+2025-05-28 23:40:36,811 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-28 23:41:45,556 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-28 23:41:45,656 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-28 23:41:45,657 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:41:45,669 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-28 23:45:53,344 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-28 23:45:53,432 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-28 23:45:53,432 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:45:53,444 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-28 23:45:53,452 - database - INFO - Database operation SUCCESS - SELECT on db2.query
+2025-05-28 23:51:37,230 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-28 23:51:37,267 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-28 23:51:37,296 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-28 23:51:37,332 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-28 23:51:37,390 - system - INFO - DatabaseInit: Database verification completed - Accounts: 8, Products: 5
+2025-05-28 23:54:16,569 - database - WARNING - Health check failed for db1: Database node db1 is not available
+2025-05-28 23:54:16,569 - database - WARNING - Health check failed for db2: Database node db2 is not available
+2025-05-28 23:54:16,577 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-28 23:54:16,689 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-28 23:54:16,689 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-28 23:54:19,564 - database - ERROR - Database operation FAILED - SELECT on db1.query: Database node db1 is not available
+2025-05-29 09:23:49,165 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 09:23:49,327 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 09:23:49,328 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 09:23:49,379 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:23:49,410 - database - INFO - Database operation SUCCESS - SELECT on db2.query
+2025-05-29 09:25:04,310 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 09:25:04,439 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 09:25:04,440 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 09:25:04,463 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:25:04,474 - database - INFO - Database operation SUCCESS - SELECT on db2.query
+2025-05-29 09:27:57,632 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-29 09:27:57,708 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-29 09:27:57,742 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-29 09:27:57,818 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-29 09:27:57,892 - system - INFO - DatabaseInit: Database verification completed - Accounts: 8, Products: 5
+2025-05-29 09:28:07,609 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 09:28:07,767 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 09:28:07,767 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 09:28:07,840 - web - INFO - Web request - GET / - Status: 200
+2025-05-29 09:28:13,701 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:28:13,705 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 09:28:14,020 - web - INFO - Client connected: 1UA4pABp0PeNh_yJAAAB
+2025-05-29 09:28:14,030 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:28:14,046 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:28:56,069 - web - INFO - Client disconnected: 1UA4pABp0PeNh_yJAAAB
+2025-05-29 09:28:56,096 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 09:28:56,618 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:28:56,620 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:28:56,625 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:28:56,627 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 09:28:56,755 - web - INFO - Client connected: 8jgYfnJhlyvnO_glAAAD
+2025-05-29 09:29:08,611 - web - INFO - Client disconnected: 8jgYfnJhlyvnO_glAAAD
+2025-05-29 09:29:08,702 - web - INFO - Web request - GET /monitoring - Status: 200
+2025-05-29 09:29:09,183 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 09:29:09,263 - web - INFO - Client connected: PbeX67baA97MBRzNAAAF
+2025-05-29 09:29:17,532 - web - INFO - Client disconnected: PbeX67baA97MBRzNAAAF
+2025-05-29 09:29:17,619 - web - INFO - Web request - GET /monitoring - Status: 200
+2025-05-29 09:29:17,883 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 09:29:18,027 - web - INFO - Client connected: Rjd0p9NfanVFhiUMAAAH
+2025-05-29 09:29:19,434 - web - INFO - Client disconnected: Rjd0p9NfanVFhiUMAAAH
+2025-05-29 09:29:19,467 - web - INFO - Web request - GET /transactions - Status: 200
+2025-05-29 09:29:20,101 - web - INFO - Client connected: OnflBoZyV-MNDF5yAAAJ
+2025-05-29 09:29:45,377 - web - INFO - Client disconnected: OnflBoZyV-MNDF5yAAAJ
+2025-05-29 09:29:45,403 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 09:29:45,850 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:45,851 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:45,857 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:45,859 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 09:29:46,021 - web - INFO - Client connected: UpoFC8CCNInJXycuAAAL
+2025-05-29 09:29:52,614 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:52,621 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:53,781 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:53,789 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:54,728 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:54,739 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:54,988 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:54,997 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:55,143 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:55,150 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:29:57,620 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:29:57,629 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 09:38:46,213 - web - INFO - Client disconnected: UpoFC8CCNInJXycuAAAL
+2025-05-29 09:45:39,807 - web - INFO - Client connected: 2QgIaaNQMmF_KyvGAAAN
+2025-05-29 09:47:18,540 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 09:47:18,653 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 09:47:18,654 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 09:47:18,658 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:51:12,013 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:51:12,023 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 09:51:14,084 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 09:51:14,093 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 09:52:21,013 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 09:52:21,095 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 09:52:21,095 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 09:52:21,101 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:00:01,802 - web - INFO - Client disconnected: 2QgIaaNQMmF_KyvGAAAN
+2025-05-29 10:00:02,110 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:00:02,679 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:00:02,680 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:00:02,688 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:00:02,690 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:00:02,711 - web - INFO - Client connected: DmewGk25CcYrM16RAAAP
+2025-05-29 10:00:05,994 - web - INFO - Client disconnected: DmewGk25CcYrM16RAAAP
+2025-05-29 10:01:03,244 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-29 10:01:03,331 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-29 10:01:03,348 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-29 10:01:03,408 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-29 10:01:03,468 - system - INFO - DatabaseInit: Database verification completed - Accounts: 8, Products: 5
+2025-05-29 10:02:07,348 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 10:02:07,480 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 10:02:07,481 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:02:07,607 - web - INFO - Web request - GET / - Status: 200
+2025-05-29 10:02:08,016 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:02:08,022 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:02:08,326 - web - INFO - Client connected: uF9Yps_kizEAeEHMAAAB
+2025-05-29 10:02:08,333 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:02:08,340 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:02:15,433 - web - INFO - Client disconnected: uF9Yps_kizEAeEHMAAAB
+2025-05-29 10:02:15,523 - web - INFO - Web request - GET /transactions - Status: 200
+2025-05-29 10:02:15,785 - web - INFO - Client connected: qvZ6M8QRWPIJwLhCAAAD
+2025-05-29 10:02:32,922 - web - INFO - Client disconnected: qvZ6M8QRWPIJwLhCAAAD
+2025-05-29 10:02:33,004 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:02:33,279 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:02:33,286 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:02:33,420 - web - INFO - Client connected: KNZK0IBU1eascVI_AAAF
+2025-05-29 10:02:33,427 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:02:33,439 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:01,447 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:03:01,452 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b started successfully
+2025-05-29 10:03:01,492 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:03:01,510 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:03:01,512 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b prepared successfully
+2025-05-29 10:03:01,548 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b COMMITTED
+2025-05-29 10:03:01,549 - transaction - INFO - Transaction 2cbc64f3-0635-4f33-8a01-4079e0067b3b committed successfully
+2025-05-29 10:03:01,549 - system - INFO - InventoryService: Order processed: Product 101, Quantity 5, Order ID 1
+2025-05-29 10:03:01,568 - web - INFO - Web request - POST /api/orders - Status: 200
+2025-05-29 10:03:01,888 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:01,896 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:02,153 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:02,161 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:06,412 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:06,424 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:08,021 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:08,028 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:20,302 - system - INFO - BankingService: Account 106 created with balance 10
+2025-05-29 10:03:20,311 - web - INFO - Web request - POST /api/accounts - Status: 201
+2025-05-29 10:03:20,644 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:20,653 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:20,893 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:20,903 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:29,319 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:29,327 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:30,823 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:30,832 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:31,177 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:31,186 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:36,752 - web - INFO - Client disconnected: KNZK0IBU1eascVI_AAAF
+2025-05-29 10:03:37,077 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:03:37,346 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:37,355 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:37,504 - web - INFO - Client connected: ianvlF-cKNI0DcvgAAAH
+2025-05-29 10:03:37,507 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:37,517 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:46,766 - web - INFO - Client disconnected: ianvlF-cKNI0DcvgAAAH
+2025-05-29 10:03:47,098 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:03:47,366 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:47,374 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:03:47,523 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:47,530 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:47,532 - web - INFO - Client connected: K-_chCt7DlW2WR7eAAAJ
+2025-05-29 10:03:49,925 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:49,932 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:50,547 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:50,557 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:51,505 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:51,513 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:51,768 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:51,774 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:51,827 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:51,835 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,093 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,101 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,158 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,175 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,424 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,434 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,502 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,514 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,765 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,775 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:52,845 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:52,856 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:53,105 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:53,126 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:03:53,184 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:03:53,193 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:04:03,466 - database - INFO - Database operation SUCCESS - SELECT on db2.query
+2025-05-29 10:04:03,475 - web - INFO - Web request - GET /api/transactions/history/106 - Status: 200
+2025-05-29 10:04:08,225 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:08,234 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:17,288 - web - INFO - Client disconnected: K-_chCt7DlW2WR7eAAAJ
+2025-05-29 10:04:17,307 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:04:17,734 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:17,734 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:17,742 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:17,744 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:04:17,939 - web - INFO - Client connected: op2FJnTdF8PuCCw_AAAL
+2025-05-29 10:04:20,926 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:20,934 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:30,619 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:30,626 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:32,352 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:32,362 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:32,858 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:32,874 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:33,851 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:33,862 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:42,486 - web - INFO - Client disconnected: op2FJnTdF8PuCCw_AAAL
+2025-05-29 10:04:42,511 - web - INFO - Web request - GET /monitoring - Status: 200
+2025-05-29 10:04:42,950 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:04:43,140 - web - INFO - Client connected: HUWgw93JdKrmuau6AAAN
+2025-05-29 10:04:49,173 - web - INFO - Client disconnected: HUWgw93JdKrmuau6AAAN
+2025-05-29 10:04:49,259 - web - INFO - Web request - GET /transactions - Status: 200
+2025-05-29 10:04:49,838 - web - INFO - Client connected: LibiPzMXZATZlLeoAAAP
+2025-05-29 10:04:56,566 - web - INFO - Client disconnected: LibiPzMXZATZlLeoAAAP
+2025-05-29 10:04:56,597 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:04:56,983 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:56,987 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:04:56,994 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:04:56,997 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:04:57,243 - web - INFO - Client connected: 5a-ICtLgjGTD2dVCAAAR
+2025-05-29 10:06:13,726 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:06:13,734 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:06:14,787 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:06:14,795 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:06:18,579 - web - INFO - Client disconnected: 5a-ICtLgjGTD2dVCAAAR
+2025-05-29 10:06:18,904 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:06:19,156 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:06:19,163 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:06:19,339 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:06:19,347 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:06:19,358 - web - INFO - Client connected: 12S_lYP7WvpejOxZAAAT
+2025-05-29 10:06:48,085 - web - INFO - Client disconnected: 12S_lYP7WvpejOxZAAAT
+2025-05-29 10:06:48,175 - web - INFO - Web request - GET /transactions - Status: 200
+2025-05-29 10:06:48,430 - web - INFO - Client connected: KwtVEDVmDep7u7gPAAAV
+2025-05-29 10:06:56,353 - web - INFO - Client disconnected: KwtVEDVmDep7u7gPAAAV
+2025-05-29 10:06:56,370 - web - INFO - Web request - GET /monitoring - Status: 200
+2025-05-29 10:06:56,825 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:06:56,996 - web - INFO - Client connected: bcWAvr83UnHW0pEsAAAX
+2025-05-29 10:07:06,811 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:07:16,484 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:07:26,842 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:07:36,487 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:07:38,672 - web - INFO - Client disconnected: bcWAvr83UnHW0pEsAAAX
+2025-05-29 10:07:38,761 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:07:39,369 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:07:39,370 - web - INFO - Client connected: KAYb0Faz9uS5kiWqAAAZ
+2025-05-29 10:07:39,372 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:07:39,382 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:07:39,387 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:08:17,919 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:08:17,928 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a started successfully
+2025-05-29 10:08:17,980 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:08:18,005 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:08:18,005 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a prepared successfully
+2025-05-29 10:08:18,043 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a COMMITTED
+2025-05-29 10:08:18,044 - transaction - INFO - Transaction 8cafbfc0-055e-4c5e-91a8-0558c3b6650a committed successfully
+2025-05-29 10:08:18,044 - system - INFO - BankingService: Transfer successful: 106 -> 1001, Amount: 10.0
+2025-05-29 10:08:18,057 - web - INFO - Web request - POST /api/transfer - Status: 200
+2025-05-29 10:08:18,383 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:08:18,396 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:08:18,643 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:08:18,653 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:08:33,907 - web - INFO - Client disconnected: KAYb0Faz9uS5kiWqAAAZ
+2025-05-29 10:22:32,332 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 10:22:32,479 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 10:22:32,479 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:23:07,383 - system - INFO - DatabaseInit: Database localhost:3316 is ready
+2025-05-29 10:23:07,465 - system - INFO - DatabaseInit: Database db1 setup completed
+2025-05-29 10:23:07,498 - system - INFO - DatabaseInit: Database localhost:3317 is ready
+2025-05-29 10:23:07,554 - system - INFO - DatabaseInit: Database db2 setup completed
+2025-05-29 10:23:07,615 - system - INFO - DatabaseInit: Database verification completed - Accounts: 9, Products: 5
+2025-05-29 10:23:08,712 - transaction - INFO - Transaction 46cc3765-bddd-47a7-b284-9a5b97c193ba started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:08,951 - transaction - INFO - Transaction 2d456743-c8a4-486c-bc96-340fdf63d8b1 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:08,955 - transaction - INFO - Transaction 2d456743-c8a4-486c-bc96-340fdf63d8b1 started successfully
+2025-05-29 10:23:08,960 - transaction - INFO - Transaction 5d1b462a-1aac-46ff-a363-5d101e2b792a started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:08,964 - system - ERROR - System error in TransactionManager.begin_transaction: Connection failed
+2025-05-29 10:23:09,005 - transaction - INFO - Transaction 749eb413-3247-4da4-ae42-35b0c39e0de3 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,013 - transaction - INFO - Transaction 749eb413-3247-4da4-ae42-35b0c39e0de3 prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:23:09,016 - transaction - INFO - Transaction 749eb413-3247-4da4-ae42-35b0c39e0de3 prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:23:09,053 - transaction - INFO - Transaction 749eb413-3247-4da4-ae42-35b0c39e0de3 prepared successfully
+2025-05-29 10:23:09,059 - transaction - INFO - Transaction a469ea08-8958-4e1f-9882-5f3ce6d04a36 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,063 - transaction - INFO - Transaction a469ea08-8958-4e1f-9882-5f3ce6d04a36 prepare phase - Participant participant_1: FAILED
+2025-05-29 10:23:09,065 - system - ERROR - System error in TransactionManager.prepare: Prepare failed for participant_1: Prepare failed
+2025-05-29 10:23:09,072 - transaction - INFO - Transaction a469ea08-8958-4e1f-9882-5f3ce6d04a36 ROLLBACK
+2025-05-29 10:23:09,076 - transaction - INFO - Transaction a469ea08-8958-4e1f-9882-5f3ce6d04a36 rolled back successfully
+2025-05-29 10:23:09,087 - transaction - INFO - Transaction f413c523-5a11-49d4-9701-98efb1cc9d11 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,090 - transaction - INFO - Transaction f413c523-5a11-49d4-9701-98efb1cc9d11 COMMITTED
+2025-05-29 10:23:09,092 - transaction - INFO - Transaction f413c523-5a11-49d4-9701-98efb1cc9d11 committed successfully
+2025-05-29 10:23:09,097 - transaction - INFO - Transaction f707d650-185e-4952-98b9-a8af8bab6c94 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,101 - transaction - INFO - Transaction f707d650-185e-4952-98b9-a8af8bab6c94 ROLLBACK
+2025-05-29 10:23:09,103 - transaction - INFO - Transaction f707d650-185e-4952-98b9-a8af8bab6c94 rolled back successfully
+2025-05-29 10:23:09,108 - transaction - INFO - Transaction 84732612-7976-4297-b9c9-c4eef1bdbaa3 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,114 - transaction - INFO - Transaction b75b65a0-1bae-43c1-b8f1-14384afd4b3a started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:09,121 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-29 10:23:09,126 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-29 10:23:09,128 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:23:09,136 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-29 10:23:09,139 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-29 10:23:09,142 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:23:09,149 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-29 10:23:09,157 - database - INFO - Database connection Connection pool created for node db1 - localhost:3306
+2025-05-29 10:23:09,160 - database - INFO - Database connection Connection pool created for node db2 - localhost:3307
+2025-05-29 10:23:09,163 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:23:09,169 - database - INFO - Database connection Connection pool created for node test - localhost:3306
+2025-05-29 10:23:09,903 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 10:23:10,026 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 10:23:10,026 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:23:10,031 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '1001' for key 'accounts.PRIMARY'
+2025-05-29 10:23:10,041 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '1002' for key 'accounts.PRIMARY'
+2025-05-29 10:23:10,049 - system - ERROR - System error in BankingService.create_account: Database error: 1062 (23000): Duplicate entry '1003' for key 'accounts.PRIMARY'
+2025-05-29 10:23:10,070 - system - ERROR - System error in DistributedApplication.initialize_sample_data: 1136 (21S01): Column count doesn't match value count at row 1
+2025-05-29 10:23:10,077 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,087 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,094 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:10,100 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 started successfully
+2025-05-29 10:23:10,128 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:23:10,142 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:23:10,143 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 prepared successfully
+2025-05-29 10:23:10,169 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 COMMITTED
+2025-05-29 10:23:10,169 - transaction - INFO - Transaction 33d4831c-2b5a-40c1-bc83-09c308e2b1c0 committed successfully
+2025-05-29 10:23:10,169 - system - INFO - BankingService: Transfer successful: 1001 -> 1002, Amount: 500.0
+2025-05-29 10:23:10,188 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,198 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,210 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,216 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:10,222 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 started successfully
+2025-05-29 10:23:10,245 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:23:10,260 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:23:10,261 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 prepared successfully
+2025-05-29 10:23:10,289 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 COMMITTED
+2025-05-29 10:23:10,289 - transaction - INFO - Transaction d6677bb8-56cd-4927-8c45-f7f657a59797 committed successfully
+2025-05-29 10:23:10,290 - system - INFO - InventoryService: Order processed: Product 101, Quantity 2, Order ID 2
+2025-05-29 10:23:10,306 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:23:10,314 - transaction - INFO - Transaction 8a094984-9f22-41f1-89f4-6027e0becf01 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:23:10,319 - transaction - INFO - Transaction 8a094984-9f22-41f1-89f4-6027e0becf01 started successfully
+2025-05-29 10:23:10,321 - system - ERROR - System error in BankingService.transfer_money: Insufficient balance. Available: 1000.00, Required: 2000.0
+2025-05-29 10:23:10,325 - transaction - INFO - Transaction 8a094984-9f22-41f1-89f4-6027e0becf01 ROLLBACK
+2025-05-29 10:23:10,325 - transaction - INFO - Transaction 8a094984-9f22-41f1-89f4-6027e0becf01 rolled back successfully
+2025-05-29 10:23:10,347 - database - INFO - Database connection Connection pool closed for node db1 - localhost:3316
+2025-05-29 10:23:10,348 - database - INFO - Database connection Connection pool closed for node db2 - localhost:3317
+2025-05-29 10:33:25,374 - database - INFO - Database connection Connection pool created for node db1 - localhost:3316
+2025-05-29 10:33:25,437 - database - INFO - Database connection Connection pool created for node db2 - localhost:3317
+2025-05-29 10:33:25,437 - database - INFO - Database manager initialized with nodes: db1, db2
+2025-05-29 10:33:27,437 - web - INFO - Web request - GET / - Status: 200
+2025-05-29 10:33:27,794 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:27,806 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:33:28,107 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:28,111 - web - INFO - Client connected: qzLzdyZ9ab6CONTZAAAB
+2025-05-29 10:33:28,122 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:33:39,470 - web - INFO - Client disconnected: qzLzdyZ9ab6CONTZAAAB
+2025-05-29 10:33:39,712 - web - INFO - Web request - GET /dashboard - Status: 200
+2025-05-29 10:33:39,981 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:39,987 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:33:40,134 - web - INFO - Client connected: tppXAFbZvA7J6fzXAAAD
+2025-05-29 10:33:40,144 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:40,152 - web - INFO - Web request - GET /api/inventory - Status: 200
+2025-05-29 10:33:52,333 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 started with participants: ['participant_1', 'participant_2']
+2025-05-29 10:33:52,343 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 started successfully
+2025-05-29 10:33:52,395 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 prepare phase - Participant participant_1: SUCCESS
+2025-05-29 10:33:52,414 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 prepare phase - Participant participant_2: SUCCESS
+2025-05-29 10:33:52,414 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 prepared successfully
+2025-05-29 10:33:52,453 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 COMMITTED
+2025-05-29 10:33:52,453 - transaction - INFO - Transaction db4cc918-6733-49db-acc3-dbb25d275154 committed successfully
+2025-05-29 10:33:52,454 - system - INFO - BankingService: Transfer successful: 1001 -> 106, Amount: 10.0
+2025-05-29 10:33:52,467 - web - INFO - Web request - POST /api/transfer - Status: 200
+2025-05-29 10:33:52,810 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:52,818 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:33:53,059 - database - INFO - Database operation SUCCESS - SELECT on db1.query
+2025-05-29 10:33:53,069 - web - INFO - Web request - GET /api/accounts - Status: 200
+2025-05-29 10:33:59,387 - web - INFO - Client disconnected: tppXAFbZvA7J6fzXAAAD
+2025-05-29 10:33:59,455 - web - INFO - Web request - GET /monitoring - Status: 200
+2025-05-29 10:33:59,917 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:00,133 - web - INFO - Client connected: jjx6gjpvoMilTL4IAAAF
+2025-05-29 10:34:10,017 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:19,607 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:30,591 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:40,291 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:50,576 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:34:59,602 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:10,689 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:20,275 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:30,593 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:40,469 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:50,612 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:35:59,607 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:36:10,569 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:36:20,276 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:36:30,668 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:36:40,261 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:36:50,585 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:37:56,914 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:38:54,061 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:38:59,931 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:39:10,331 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:39:20,625 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:39:30,259 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:39:40,672 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:39:50,498 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:40:00,665 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:40:56,347 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:41:56,685 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:42:56,324 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:43:56,907 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:44:56,352 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:45:56,651 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:46:56,310 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:47:56,652 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:48:56,311 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:49:56,641 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:50:56,353 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:51:56,736 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:52:56,345 - web - INFO - Web request - GET /api/system/status - Status: 200
+2025-05-29 10:53:56,630 - web - INFO - Web request - GET /api/system/status - Status: 200

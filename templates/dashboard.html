@@ -1,0 +1,491 @@
+{% extends "base.html" %}
+
+{% block title %}仪表板 - 分布式数据库系统{% endblock %}
+
+{% block page_title %}系统仪表板{% endblock %}
+
+{% block content %}
+<!-- 系统状态卡片 -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="active-connections">0</h4>
+                        <p class="card-text">活跃连接</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-plug fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="successful-transactions">0</h4>
+                        <p class="card-text">成功事务</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="pending-transactions">0</h4>
+                        <p class="card-text">待处理事务</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-clock fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card text-white bg-danger">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4 id="failed-transactions">0</h4>
+                        <p class="card-text">失败事务</p>
+                    </div>
+                    <div class="align-self-center">
+                        <i class="fas fa-times-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 账户管理和转账 -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-plus"></i>
+                    账户管理
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="create-account-form">
+                    <div class="mb-3">
+                        <label for="account-id" class="form-label">账户ID</label>
+                        <input type="number" class="form-control" id="account-id" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="initial-balance" class="form-label">初始余额</label>
+                        <input type="number" class="form-control" id="initial-balance" step="0.01" value="0">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        创建账户
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-exchange-alt"></i>
+                    资金转账
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="transfer-form">
+                    <div class="mb-3">
+                        <label for="from-account" class="form-label">源账户</label>
+                        <input type="number" class="form-control" id="from-account" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="to-account" class="form-label">目标账户</label>
+                        <input type="number" class="form-control" id="to-account" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="transfer-amount" class="form-label">转账金额</label>
+                        <input type="number" class="form-control" id="transfer-amount" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-paper-plane"></i>
+                        执行转账
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 账户列表和库存管理 -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list"></i>
+                    账户列表
+                </h5>
+                <button class="btn btn-sm btn-outline-light" onclick="loadAccounts()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>账户ID</th>
+                                <th>余额</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accounts-table">
+                            <tr>
+                                <td colspan="3" class="text-center">加载中...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-boxes"></i>
+                    库存管理
+                </h5>
+                <button class="btn btn-sm btn-outline-light" onclick="loadInventory()">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>产品ID</th>
+                                <th>名称</th>
+                                <th>库存</th>
+                                <th>价格</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table">
+                            <tr>
+                                <td colspan="4" class="text-center">加载中...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <hr>
+                
+                <form id="order-form">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="number" class="form-control form-control-sm" id="product-id" placeholder="产品ID" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control form-control-sm" id="order-quantity" placeholder="数量" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control form-control-sm" id="customer-id" placeholder="客户ID" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-sm btn-primary w-100">下单</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 实时日志 -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list-alt"></i>
+                    实时事务日志
+                </h5>
+                <button class="btn btn-sm btn-outline-light" onclick="clearLogs()">
+                    <i class="fas fa-trash"></i>
+                    清空日志
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="transaction-logs" class="transaction-log">
+                    <div class="text-muted text-center">暂无日志记录</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 加载账户列表
+    function loadAccounts() {
+        fetch('/api/accounts')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('accounts-table');
+                if (data.success && data.data.length > 0) {
+                    tbody.innerHTML = data.data.map(account => `
+                        <tr>
+                            <td>${account.id}</td>
+                            <td>¥${account.balance.toFixed(2)}</td>
+                            <td>
+                                <button class="btn btn-sm btn-info" onclick="viewHistory(${account.id})">
+                                    <i class="fas fa-history"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="3" class="text-center">暂无账户</td></tr>';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading accounts:', error);
+                document.getElementById('accounts-table').innerHTML = 
+                    '<tr><td colspan="3" class="text-center text-danger">加载失败</td></tr>';
+            });
+    }
+    
+    // 加载库存列表
+    function loadInventory() {
+        fetch('/api/inventory')
+            .then(response => response.json())
+            .then(data => {
+                const tbody = document.getElementById('inventory-table');
+                if (data.success && data.data.length > 0) {
+                    tbody.innerHTML = data.data.map(item => `
+                        <tr>
+                            <td>${item.product_id}</td>
+                            <td>${item.product_name}</td>
+                            <td>${item.quantity}</td>
+                            <td>¥${item.price.toFixed(2)}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="4" class="text-center">暂无库存</td></tr>';
+                }
+            })
+            .catch(error => {
+                console.error('Error loading inventory:', error);
+                document.getElementById('inventory-table').innerHTML = 
+                    '<tr><td colspan="4" class="text-center text-danger">加载失败</td></tr>';
+            });
+    }
+    
+    // 添加日志条目
+    function addLogEntry(message, type = 'info') {
+        const logsContainer = document.getElementById('transaction-logs');
+        const logEntry = document.createElement('div');
+        logEntry.className = `log-entry log-${type}`;
+        logEntry.innerHTML = `
+            <div class="d-flex justify-content-between">
+                <span>${message}</span>
+                <small class="text-muted">${new Date().toLocaleTimeString()}</small>
+            </div>
+        `;
+        
+        if (logsContainer.children.length === 1 && logsContainer.children[0].textContent.includes('暂无日志')) {
+            logsContainer.innerHTML = '';
+        }
+        
+        logsContainer.insertBefore(logEntry, logsContainer.firstChild);
+        
+        // 限制日志条目数量
+        while (logsContainer.children.length > 50) {
+            logsContainer.removeChild(logsContainer.lastChild);
+        }
+    }
+    
+    // 清空日志
+    function clearLogs() {
+        document.getElementById('transaction-logs').innerHTML = 
+            '<div class="text-muted text-center">暂无日志记录</div>';
+    }
+    
+    // 查看交易历史
+    function viewHistory(accountId) {
+        fetch(`/api/transactions/history/${accountId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // 这里可以显示一个模态框或跳转到详细页面
+                    console.log('Transaction history:', data.data);
+                    showMessage(`账户 ${accountId} 的交易历史已加载`, 'info');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading transaction history:', error);
+                showMessage('加载交易历史失败', 'error');
+            });
+    }
+    
+    // 表单提交处理
+    document.getElementById('create-account-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const accountId = document.getElementById('account-id').value;
+        const initialBalance = document.getElementById('initial-balance').value;
+        
+        fetch('/api/accounts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                account_id: parseInt(accountId),
+                initial_balance: parseFloat(initialBalance)
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showMessage(data.message, 'success');
+                addLogEntry(`创建账户 ${accountId}，初始余额 ¥${initialBalance}`, 'success');
+                this.reset();
+                loadAccounts();
+            } else {
+                showMessage(data.error, 'error');
+                addLogEntry(`创建账户失败: ${data.error}`, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error creating account:', error);
+            showMessage('创建账户失败', 'error');
+            addLogEntry(`创建账户失败: ${error.message}`, 'error');
+        });
+    });
+    
+    document.getElementById('transfer-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const fromAccount = document.getElementById('from-account').value;
+        const toAccount = document.getElementById('to-account').value;
+        const amount = document.getElementById('transfer-amount').value;
+        
+        fetch('/api/transfer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                from_account: parseInt(fromAccount),
+                to_account: parseInt(toAccount),
+                amount: parseFloat(amount)
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showMessage(data.message, 'success');
+                addLogEntry(`转账成功: ${fromAccount} → ${toAccount}, ¥${amount}`, 'success');
+                this.reset();
+                loadAccounts();
+            } else {
+                showMessage(data.error, 'error');
+                addLogEntry(`转账失败: ${data.error}`, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error processing transfer:', error);
+            showMessage('转账失败', 'error');
+            addLogEntry(`转账失败: ${error.message}`, 'error');
+        });
+    });
+    
+    document.getElementById('order-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const productId = document.getElementById('product-id').value;
+        const quantity = document.getElementById('order-quantity').value;
+        const customerId = document.getElementById('customer-id').value;
+        
+        fetch('/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                product_id: parseInt(productId),
+                quantity: parseInt(quantity),
+                customer_id: parseInt(customerId)
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showMessage(data.message, 'success');
+                addLogEntry(`订单处理成功: 产品 ${productId}, 数量 ${quantity}`, 'success');
+                this.reset();
+                loadInventory();
+            } else {
+                showMessage(data.error, 'error');
+                addLogEntry(`订单处理失败: ${data.error}`, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error processing order:', error);
+            showMessage('订单处理失败', 'error');
+            addLogEntry(`订单处理失败: ${error.message}`, 'error');
+        });
+    });
+    
+    // Socket.IO事件监听
+    socket.on('account_created', function(data) {
+        addLogEntry(`新账户创建: ${data.account_id}, 余额 ¥${data.balance}`, 'success');
+        loadAccounts();
+    });
+    
+    socket.on('transfer_completed', function(data) {
+        addLogEntry(`转账完成: ${data.from_account} → ${data.to_account}, ¥${data.amount}`, 'success');
+        loadAccounts();
+    });
+    
+    socket.on('order_processed', function(data) {
+        addLogEntry(`订单处理: 产品 ${data.product_id}, 数量 ${data.quantity}`, 'success');
+        loadInventory();
+    });
+    
+    // 页面加载时初始化数据
+    document.addEventListener('DOMContentLoaded', function() {
+        loadAccounts();
+        loadInventory();
+        
+        // 模拟统计数据更新
+        setInterval(function() {
+            document.getElementById('active-connections').textContent = Math.floor(Math.random() * 10) + 1;
+            document.getElementById('successful-transactions').textContent = Math.floor(Math.random() * 100) + 50;
+            document.getElementById('pending-transactions').textContent = Math.floor(Math.random() * 5);
+            document.getElementById('failed-transactions').textContent = Math.floor(Math.random() * 3);
+        }, 5000);
+    });
+</script>
+{% endblock %}
