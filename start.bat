@@ -9,36 +9,36 @@ echo.
 :menu
 echo Please select an option:
 echo.
-echo 1. Watch System Demo
-echo 2. Complete System Setup
-echo 3. Start Database Containers
-echo 4. Initialize Databases
-echo 5. Run System Tests
-echo 6. Start Web Interface
-echo 7. Check System Status
-echo 8. Run Complete Flow
-echo 9. Exit
+echo 
+echo 1. Complete System Setup
+echo 2. Start Database Containers
+echo 3. Initialize Databases
+echo 4. Run System Tests
+echo 5. Start Web Interface
+echo 6. Check System Status
+echo 7. Run Complete Flow
+echo 8. Exit
 echo.
 
-set /p choice="Enter option (1-9): "
+set /p choice="Enter option (1-8): "
 
-if "%choice%"=="1" goto demo
-if "%choice%"=="2" goto setup
-if "%choice%"=="3" goto start_db
-if "%choice%"=="4" goto init_db
-if "%choice%"=="5" goto test
-if "%choice%"=="6" goto web
-if "%choice%"=="7" goto status
-if "%choice%"=="8" goto all
-if "%choice%"=="9" goto exit
+@REM if "%choice%"=="1" goto demo
+if "%choice%"=="1" goto setup
+if "%choice%"=="2" goto start_db
+if "%choice%"=="3" goto init_db
+if "%choice%"=="4" goto test
+if "%choice%"=="5" goto web
+if "%choice%"=="6" goto status
+if "%choice%"=="7" goto all
+if "%choice%"=="8" goto exit
 goto invalid
 
-:demo
-echo.
-echo Starting system demo...
-python demo.py
-pause
-goto menu
+@REM :demo
+@REM echo.
+@REM echo Starting system demo...
+@REM python demo.py
+@REM pause
+@REM goto menu
 
 :setup
 echo.

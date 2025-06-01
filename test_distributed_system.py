@@ -350,9 +350,9 @@ def run_tests():
     exit_code = pytest.main(pytest_args)
     
     if exit_code == 0:
-        print("✅ 所有测试通过！")
+        print("所有测试通过！")
     else:
-        print("❌ 部分测试失败！")
+        print("部分测试失败！")
     
     return exit_code
 

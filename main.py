@@ -130,7 +130,7 @@ def run_tests():
         from test_distributed_system import run_tests
         return run_tests() == 0
     except Exception as e:
-        print(f"❌ 测试运行失败: {e}")
+        print(f"测试运行失败: {e}")
         return False
 
 def start_web_interface():
@@ -158,7 +158,7 @@ def start_web_interface():
 
         return True
     except Exception as e:
-        print(f"❌ Web界面启动失败: {e}")
+        print(f"Web界面启动失败: {e}")
         print("可能的解决方案:")
         print("1. 检查端口是否被占用")
         print("2. 尝试运行: pip install --upgrade flask-socketio")
@@ -173,7 +173,7 @@ def run_demo():
         main()
         return True
     except Exception as e:
-        print(f"❌ 演示程序运行失败: {e}")
+        print(f"演示程序运行失败: {e}")
         return False
 
 def show_status():
@@ -189,9 +189,9 @@ def show_status():
             if result.stdout.strip():
                 print(f"✅ {container}: {result.stdout.strip()}")
             else:
-                print(f"❌ {container}: 未运行")
+                print(f"{container}: 未运行")
         except subprocess.CalledProcessError:
-            print(f"❌ {container}: 状态未知")
+            print(f"{container}: 状态未知")
 
     # 检查数据库连接
     try:
@@ -202,7 +202,7 @@ def show_status():
             status_text = "可用" if node_status['available'] else "不可用"
             print(f"  {node_id}: {status_text} ({node_status['host']}:{node_status['port']})")
     except Exception as e:
-        print(f"❌ 无法获取数据库状态: {e}")
+        print(f"无法获取数据库状态: {e}")
 
 def main():
     """主函数"""
@@ -214,7 +214,7 @@ def main():
 
     args = parser.parse_args()
 
-    print("🚀 分布式数据库系统管理工具")
+    print("分布式数据库系统管理工具")
     print("=" * 50)
 
     if args.command == 'setup':
@@ -227,7 +227,7 @@ def main():
             sys.exit(1)
         if not init_databases():
             sys.exit(1)
-        print("\n🎉 系统设置完成！")
+        print("\n系统设置完成！")
         print("现在可以运行: python main.py web 启动Web界面")
 
     elif args.command == 'start-db':
@@ -279,10 +279,10 @@ def main():
         if not init_databases():
             sys.exit(1)
         if not run_tests():
-            print("⚠️ 测试失败，但继续运行演示")
+            print("测试失败，但继续运行演示")
         if not run_demo():
             sys.exit(1)
-        print("\n🎉 完整流程执行完成！")
+        print("\n完整流程执行完成！")
 
 if __name__ == "__main__":
     main()
