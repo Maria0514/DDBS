@@ -216,9 +216,10 @@ class TestBankingService:
     
     def setup_method(self):
         """测试前的设置"""
-        with patch('distributed_app.db_manager') as mock_db_manager:
-            self.mock_db_manager = mock_db_manager
-            self.banking_service = BankingService()
+        # with patch('distributed_app.db_manager') as mock_db_manager:
+        self.banking_service = BankingService()
+        self.mock_db_manager = MagicMock()
+        self.banking_service.db_manager = self.mock_db_manager
     
     def test_create_account_success(self):
         """测试成功创建账户"""
