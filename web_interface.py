@@ -14,6 +14,7 @@ from config import WebConfig
 from database_manager import get_db_manager
 from distributed_app import BankingService, InventoryService
 from logger import web_logger, log_web_request, log_system_info
+from demo_2pc import run_concurrent_transactions 
 
 def convert_decimal_and_datetime(obj):
     """转换Decimal和datetime对象为JSON可序列化的类型"""
@@ -272,7 +273,24 @@ def get_transaction_history(account_id):
             'success': False,
             'error': str(e)
         }), 500
-
+@app.route('/api/test', methods=['POST'])
+def run_test():
+    """运行并发事务测试"""
+    try:
+        # 调用 demo_2pc.py 中的 run_concurrent_transactions 函数
+        from demo_2pc import run_concurrent_transactions
+        run_concurrent_transactions()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Test completed successfully'
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+    
 # SocketIO事件处理
 @socketio.on('connect')
 def handle_connect():
@@ -293,6 +311,37 @@ def handle_status_request():
         emit('status_update', status)
     except Exception as e:
         emit('error', {'message': str(e)})
+
+# 新增事件监听器
+@socketio.on('transfer_completed')
+def handle_transfer_completed(data):
+    """处理转账完成事件"""
+    emit('transfer_completed', data)
+
+@socketio.on('transfer_failed')
+def handle_transfer_failed(data):
+    """处理转账失败事件"""
+    emit('transfer_failed', data)
+
+@socketio.on('transfer_error')
+def handle_transfer_error(data):
+    """处理转账错误事件"""
+    emit('transfer_error', data)
+
+@socketio.on('order_completed')
+def handle_order_completed(data):
+    """处理订单完成事件"""
+    emit('order_completed', data)
+
+@socketio.on('order_failed')
+def handle_order_failed(data):
+    """处理订单失败事件"""
+    emit('order_failed', data)
+
+@socketio.on('order_error')
+def handle_order_error(data):
+    """处理订单错误事件"""
+    emit('order_error', data)
 
 def background_monitor():
     """后台监控线程"""

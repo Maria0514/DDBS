@@ -198,6 +198,10 @@
                     <button class="btn btn-secondary" onclick="exportSystemReport()">
                         <i class="fas fa-file-export"></i> 导出系统报告
                     </button>
+                    <!-- 新增测试按钮 -->
+                    <button class="btn btn-primary" id="test-button">
+                        <i class="fas fa-flask"></i> 测试
+                    </button>
                 </div>
                 
                 <hr>
@@ -220,79 +224,20 @@
 
 {% block extra_js %}
 <script>
-    let performanceChart, loadChart, networkChart;
-    let systemStartTime = Date.now();
-    let logBuffer = [];
+    let demoInterval;
+    let currentStep = 0;
+    let transactionChart;
     
     // 初始化图表
-    function initCharts() {
-        // 性能图表
-        const perfCtx = document.getElementById('performance-chart').getContext('2d');
-        performanceChart = new Chart(perfCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: '事务/秒',
-                    data: [],
-                    borderColor: '#007bff',
-                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-        
-        // 负载图表
-        const loadCtx = document.getElementById('load-chart').getContext('2d');
-        loadChart = new Chart(loadCtx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [
-                    {
-                        label: 'CPU使用率',
-                        data: [],
-                        borderColor: '#28a745',
-                        backgroundColor: 'rgba(40, 167, 69, 0.1)'
-                    },
-                    {
-                        label: '内存使用率',
-                        data: [],
-                        borderColor: '#ffc107',
-                        backgroundColor: 'rgba(255, 193, 7, 0.1)'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 100
-                    }
-                }
-            }
-        });
-        
-        // 网络图表
-        const netCtx = document.getElementById('network-chart').getContext('2d');
-        networkChart = new Chart(netCtx, {
+    function initChart() {
+        const ctx = document.getElementById('transaction-chart').getContext('2d');
+        transactionChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ['正常连接', '超时连接', '失败连接'],
+                labels: ['已提交', '已回滚', '活跃中'],
                 datasets: [{
                     data: [0, 0, 0],
-                    backgroundColor: ['#28a745', '#ffc107', '#dc3545']
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107']
                 }]
             },
             options: {
@@ -307,240 +252,245 @@
         });
     }
     
-    // 更新系统运行时间
-    function updateUptime() {
-        const uptime = Date.now() - systemStartTime;
-        const hours = Math.floor(uptime / (1000 * 60 * 60));
-        const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
+    // 2PC演示动画
+    function startDemo() {
+        const steps = [
+            { phase: "初始化事务", coordinator: "bg-primary", p1: "bg-secondary", p2: "bg-secondary" },
+            { phase: "阶段1：发送准备请求", coordinator: "bg-warning", p1: "bg-warning", p2: "bg-warning" },
+            { phase: "阶段1：参与者准备", coordinator: "bg-warning", p1: "bg-info", p2: "bg-info" },
+            { phase: "阶段1：收集投票结果", coordinator: "bg-info", p1: "bg-info", p2: "bg-info" },
+            { phase: "阶段2：发送提交请求", coordinator: "bg-success", p1: "bg-warning", p2: "bg-warning" },
+            { phase: "阶段2：执行提交", coordinator: "bg-success", p1: "bg-success", p2: "bg-success" },
+            { phase: "事务完成", coordinator: "bg-primary", p1: "bg-secondary", p2: "bg-secondary" }
+        ];
         
-        document.getElementById('system-uptime').textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
-    
-    // 更新数据库节点状态
-    function updateDatabaseNodes() {
-        fetch('/api/system/status')
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const container = document.getElementById('database-nodes');
-                    container.innerHTML = '';
-                    
-                    for (const [nodeId, status] of Object.entries(data.data)) {
-                        const nodeDiv = document.createElement('div');
-                        nodeDiv.className = 'mb-3 p-3 border rounded';
-                        nodeDiv.innerHTML = `
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h6 class="mb-1">
-                                        <span class="status-indicator ${status.available ? 'status-online' : 'status-offline'}"></span>
-                                        ${nodeId.toUpperCase()}
-                                    </h6>
-                                    <small class="text-muted">${status.host}:${status.port}</small>
-                                </div>
-                                <div class="text-end">
-                                    <span class="badge ${status.available ? 'bg-success' : 'bg-danger'}">
-                                        ${status.available ? '在线' : '离线'}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <small>数据库: ${status.database}</small><br>
-                                <small>最后检查: ${status.last_check ? new Date(status.last_check * 1000).toLocaleTimeString() : '未知'}</small>
-                            </div>
-                        `;
-                        container.appendChild(nodeDiv);
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error updating database nodes:', error);
-            });
-    }
-    
-    // 更新性能数据
-    function updatePerformanceData() {
-        const now = new Date().toLocaleTimeString();
-        const tps = Math.floor(Math.random() * 100) + 20; // 模拟TPS数据
+        currentStep = 0;
         
-        // 更新性能图表
-        if (performanceChart.data.labels.length >= 20) {
-            performanceChart.data.labels.shift();
-            performanceChart.data.datasets[0].data.shift();
-        }
-        
-        performanceChart.data.labels.push(now);
-        performanceChart.data.datasets[0].data.push(tps);
-        performanceChart.update('none');
-        
-        // 更新负载图表
-        const cpu = Math.floor(Math.random() * 80) + 10;
-        const memory = Math.floor(Math.random() * 70) + 20;
-        
-        if (loadChart.data.labels.length >= 20) {
-            loadChart.data.labels.shift();
-            loadChart.data.datasets[0].data.shift();
-            loadChart.data.datasets[1].data.shift();
-        }
-        
-        loadChart.data.labels.push(now);
-        loadChart.data.datasets[0].data.push(cpu);
-        loadChart.data.datasets[1].data.push(memory);
-        loadChart.update('none');
-        
-        // 更新网络图表
-        const normal = Math.floor(Math.random() * 50) + 40;
-        const timeout = Math.floor(Math.random() * 10) + 2;
-        const failed = Math.floor(Math.random() * 5) + 1;
-        
-        networkChart.data.datasets[0].data = [normal, timeout, failed];
-        networkChart.update();
-        
-        // 更新统计数据
-        document.getElementById('total-requests').textContent = Math.floor(Math.random() * 10000) + 5000;
-        document.getElementById('avg-response-time').textContent = Math.floor(Math.random() * 100) + 50 + 'ms';
-        document.getElementById('error-rate').textContent = (Math.random() * 5).toFixed(2) + '%';
-    }
-    
-    // 添加系统日志
-    function addSystemLog(level, message) {
-        const timestamp = new Date().toLocaleTimeString();
-        const logEntry = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
-        
-        logBuffer.push({ level, entry: logEntry, timestamp });
-        
-        // 限制日志缓冲区大小
-        if (logBuffer.length > 1000) {
-            logBuffer.shift();
-        }
-        
-        updateLogDisplay();
-    }
-    
-    // 更新日志显示
-    function updateLogDisplay() {
-        const logContainer = document.getElementById('system-logs');
-        const levelFilter = document.getElementById('log-level-filter').value;
-        
-        let filteredLogs = logBuffer;
-        if (levelFilter !== 'all') {
-            filteredLogs = logBuffer.filter(log => log.level === levelFilter);
-        }
-        
-        const logHtml = filteredLogs.slice(-50).map(log => {
-            const colorClass = {
-                'error': 'text-danger',
-                'warning': 'text-warning',
-                'info': 'text-info',
-                'debug': 'text-muted'
-            }[log.level] || 'text-light';
-            
-            return `<div class="${colorClass}">${log.entry}</div>`;
-        }).join('');
-        
-        logContainer.innerHTML = logHtml || '<div class="text-muted">暂无日志数据</div>';
-        logContainer.scrollTop = logContainer.scrollHeight;
-    }
-    
-    // 清空系统日志
-    function clearSystemLogs() {
-        logBuffer = [];
-        updateLogDisplay();
-    }
-    
-    // 系统控制函数
-    function testConnections() {
-        addSystemLog('info', '开始测试数据库连接...');
-        
-        fetch('/api/system/status')
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    let allOnline = true;
-                    for (const [nodeId, status] of Object.entries(data.data)) {
-                        if (status.available) {
-                            addSystemLog('info', `数据库 ${nodeId} 连接正常`);
-                        } else {
-                            addSystemLog('error', `数据库 ${nodeId} 连接失败`);
-                            allOnline = false;
-                        }
-                    }
-                    
-                    if (allOnline) {
-                        showMessage('所有数据库连接正常', 'success');
+        demoInterval = setInterval(() => {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                
+                // 更新阶段指示器
+                document.getElementById('phase-indicator').textContent = step.phase;
+                
+                // 更新状态指示器
+                document.getElementById('coordinator-status').className = `badge ${step.coordinator} p-3 mb-2`;
+                document.getElementById('participant1-status').className = `badge ${step.p1} p-3 mb-2`;
+                document.getElementById('participant2-status').className = `badge ${step.p2} p-3 mb-2`;
+                
+                // 高亮当前步骤
+                document.querySelectorAll('.step-item').forEach((item, index) => {
+                    if (index === currentStep) {
+                        item.className = 'step-item mb-2 p-2 border-start border-3 border-primary bg-light';
                     } else {
-                        showMessage('部分数据库连接异常', 'warning');
+                        item.className = 'step-item mb-2 p-2 border-start border-3 border-secondary';
                     }
-                }
-            })
-            .catch(error => {
-                addSystemLog('error', `连接测试失败: ${error.message}`);
-                showMessage('连接测试失败', 'error');
-            });
+                });
+                
+                currentStep++;
+            } else {
+                clearInterval(demoInterval);
+                document.getElementById('demo-start').disabled = false;
+                document.getElementById('demo-pause').disabled = true;
+                currentStep = 0;
+            }
+        }, 2000);
+        
+        document.getElementById('demo-start').disabled = true;
+        document.getElementById('demo-pause').disabled = false;
     }
     
-    function refreshStats() {
-        addSystemLog('info', '刷新统计数据...');
-        updatePerformanceData();
-        updateDatabaseNodes();
-        showMessage('统计数据已刷新', 'success');
+    // 暂停演示
+    function pauseDemo() {
+        clearInterval(demoInterval);
+        document.getElementById('demo-start').disabled = false;
+        document.getElementById('demo-pause').disabled = true;
     }
     
-    function clearCache() {
-        addSystemLog('info', '清空系统缓存...');
-        showMessage('缓存已清空', 'success');
+    // 重置演示
+    function resetDemo() {
+        clearInterval(demoInterval);
+        currentStep = 0;
+        
+        document.getElementById('phase-indicator').textContent = '等待事务开始...';
+        document.getElementById('coordinator-status').className = 'badge bg-primary p-3 mb-2';
+        document.getElementById('participant1-status').className = 'badge bg-secondary p-3 mb-2';
+        document.getElementById('participant2-status').className = 'badge bg-secondary p-3 mb-2';
+        
+        document.querySelectorAll('.step-item').forEach(item => {
+            item.className = 'step-item mb-2 p-2 border-start border-3 border-secondary';
+        });
+        
+        document.getElementById('demo-start').disabled = false;
+        document.getElementById('demo-pause').disabled = true;
     }
     
-    function exportSystemReport() {
-        addSystemLog('info', '导出系统报告...');
-        showMessage('系统报告导出功能开发中...', 'info');
-    }
-    
-    function restartSystem() {
-        if (confirm('确定要重启系统吗？这将中断所有正在进行的事务。')) {
-            addSystemLog('warning', '系统重启请求...');
-            showMessage('系统重启功能需要管理员权限', 'warning');
+    // 添加事务日志条目
+    function addTransactionLog(transactionId, type, status, participants, details) {
+        const table = document.getElementById('transaction-log-table');
+        
+        if (table.children.length === 1 && table.children[0].children.length === 1) {
+            table.innerHTML = '';
+        }
+        
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${new Date().toLocaleString()}</td>
+            <td><code>${transactionId}</code></td>
+            <td><span class="badge bg-info">${type}</span></td>
+            <td><span class="badge bg-${status === 'COMMITTED' ? 'success' : status === 'ABORTED' ? 'danger' : 'warning'}">${status}</span></td>
+            <td>${participants}</td>
+            <td>${details}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="viewTransactionDetails('${transactionId}')">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </td>
+        `;
+        
+        table.insertBefore(row, table.firstChild);
+        
+        // 限制日志条目数量
+        while (table.children.length > 100) {
+            table.removeChild(table.lastChild);
         }
     }
     
-    // 事件监听器
-    document.getElementById('log-level-filter').addEventListener('change', updateLogDisplay);
+    // 清空事务日志
+    function clearTransactionLogs() {
+        document.getElementById('transaction-log-table').innerHTML = 
+            '<tr><td colspan="7" class="text-center">暂无事务记录</td></tr>';
+    }
     
-    document.getElementById('system-config-form').addEventListener('submit', function(e) {
+    // 导出日志
+    function exportLogs() {
+        // 这里可以实现日志导出功能
+        showMessage('日志导出功能开发中...', 'info');
+    }
+    
+    // 查看事务详情
+    function viewTransactionDetails(transactionId) {
+        showMessage(`查看事务 ${transactionId} 的详细信息`, 'info');
+    }
+    
+    // 更新统计数据
+    function updateStats() {
+        // 模拟统计数据
+        const committed = Math.floor(Math.random() * 50) + 20;
+        const aborted = Math.floor(Math.random() * 10) + 2;
+        const active = Math.floor(Math.random() * 5);
+        const total = committed + aborted + active;
+        
+        document.getElementById('total-transactions').textContent = total;
+        document.getElementById('committed-transactions').textContent = committed;
+        document.getElementById('aborted-transactions').textContent = aborted;
+        document.getElementById('active-transactions').textContent = active;
+        
+        // 更新图表
+        if (transactionChart) {
+            transactionChart.data.datasets[0].data = [committed, aborted, active];
+            transactionChart.update();
+        }
+    }
+    
+    // 事务测试表单
+    document.getElementById('transaction-test-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        addSystemLog('info', '保存系统配置...');
-        showMessage('配置已保存', 'success');
+        
+        const scenario = document.getElementById('test-scenario').value;
+        const fromAccount = document.getElementById('test-from-account').value;
+        const toAccount = document.getElementById('test-to-account').value;
+        const amount = document.getElementById('test-amount').value;
+        
+        // 生成模拟事务ID
+        const transactionId = 'tx_' + Date.now();
+        
+        // 根据场景模拟不同结果
+        let status, details;
+        switch (scenario) {
+            case 'normal':
+                status = 'COMMITTED';
+                details = `正常转账: ${fromAccount} → ${toAccount}, ¥${amount}`;
+                break;
+            case 'insufficient':
+                status = 'ABORTED';
+                details = `余额不足: 账户 ${fromAccount}`;
+                break;
+            case 'network-failure':
+                status = 'ABORTED';
+                details = `网络故障: 无法连接到参与者`;
+                break;
+            case 'participant-failure':
+                status = 'ABORTED';
+                details = `参与者故障: 数据库2响应超时`;
+                break;
+        }
+        
+        // 添加到日志
+        addTransactionLog(transactionId, 'TRANSFER', status, 'DB1, DB2', details);
+        
+        // 显示结果消息
+        const messageType = status === 'COMMITTED' ? 'success' : 'error';
+        showMessage(`测试完成: ${details}`, messageType);
+        
+        // 更新统计
+        updateStats();
     });
     
     // Socket.IO事件监听
-    socket.on('system_status', function(data) {
-        // 实时更新数据库状态
-        updateDatabaseNodes();
-    });
-    
     socket.on('transfer_completed', function(data) {
-        addSystemLog('info', `转账事务完成: ${data.from_account} → ${data.to_account}, ¥${data.amount}`);
+        const transactionId = 'tx_' + Date.now();
+        addTransactionLog(
+            transactionId, 
+            'TRANSFER', 
+            'COMMITTED', 
+            'DB1, DB2', 
+            `转账: ${data.from_account} → ${data.to_account}, ¥${data.amount}`
+        );
+        updateStats();
     });
     
     socket.on('order_processed', function(data) {
-        addSystemLog('info', `订单处理完成: 产品 ${data.product_id}, 数量 ${data.quantity}`);
+        const transactionId = 'tx_' + Date.now();
+        addTransactionLog(
+            transactionId, 
+            'ORDER', 
+            'COMMITTED', 
+            'DB1, DB2', 
+            `订单: 产品 ${data.product_id}, 数量 ${data.quantity}`
+        );
+        updateStats();
     });
     
     // 页面加载时初始化
     document.addEventListener('DOMContentLoaded', function() {
-        initCharts();
-        updateDatabaseNodes();
+        initChart();
+        updateStats();
         
-        // 定期更新数据
-        setInterval(updateUptime, 1000);
-        setInterval(updatePerformanceData, 5000);
-        setInterval(updateDatabaseNodes, 10000);
-        
-        // 模拟一些初始日志
-        addSystemLog('info', '系统监控模块已启动');
-        addSystemLog('info', '开始监控数据库连接状态');
-        addSystemLog('info', '性能监控已激活');
+        // 定期更新统计数据
+        setInterval(updateStats, 10000);
+    });
+
+    // 新增测试按钮点击事件
+    document.getElementById('test-button').addEventListener('click', function() {
+        fetch('/api/test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showMessage(data.message, 'success');
+            } else {
+                showMessage(data.error, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error running test:', error);
+            showMessage('测试失败', 'error');
+        });
     });
 </script>
 {% endblock %}
