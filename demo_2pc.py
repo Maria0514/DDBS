@@ -10,7 +10,6 @@ from distributed_app import BankingService, InventoryService
 from database_manager import get_db_manager
 from logger import system_logger, log_system_info, log_system_error
 from init_databases import setup_database_1, setup_database_2
-from web_interface import socketio, app  # 导入 Flask 和 SocketIO 实例
 
 # 创建银行服务和库存服务实例
 banking_service = BankingService()
@@ -29,27 +28,11 @@ def transfer_task(from_account, to_account, amount):
         
         if success:
             log_system_info("demo_2pc", f"Transfer succeeded: {from_account} -> {to_account}, Amount: {amount}")
-            socketio.emit('transfer_completed', {
-                'from_account': from_account,
-                'to_account': to_account,
-                'amount': amount,
-                'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-            })
         else:
             log_system_info("demo_2pc", f"Transfer failed: {from_account} -> {to_account}, Amount: {amount}")
-            socketio.emit('transfer_failed', {
-                'from_account': from_account,
-                'to_account': to_account,
-                'amount': amount,
-                'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-            })
     
     except Exception as e:
         log_system_error("demo_2pc", f"Transfer error: {str(e)}")
-        socketio.emit('transfer_error', {
-            'error': str(e),
-            'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-        })
 
 def inventory_task(product_id, quantity, customer_id):
     """
@@ -64,27 +47,11 @@ def inventory_task(product_id, quantity, customer_id):
         
         if success:
             log_system_info("demo_2pc", f"Order succeeded: Product {product_id}, Quantity {quantity}, Customer {customer_id}")
-            socketio.emit('order_completed', {
-                'product_id': product_id,
-                'quantity': quantity,
-                'customer_id': customer_id,
-                'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-            })
         else:
             log_system_info("demo_2pc", f"Order failed: Product {product_id}, Quantity {quantity}, Customer {customer_id}")
-            socketio.emit('order_failed', {
-                'product_id': product_id,
-                'quantity': quantity,
-                'customer_id': customer_id,
-                'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-            })
     
     except Exception as e:
         log_system_error("demo_2pc", f"Order error: {str(e)}")
-        socketio.emit('order_error', {
-            'error': str(e),
-            'timestamp': time.strftime("%Y-%m-%d %H:%M:%S")
-        })
 
 def initialize_demo_data():
     """
@@ -163,6 +130,9 @@ if __name__ == "__main__":
 
     # 运行演示
     run_concurrent_transactions()
+
+    # 导入 Flask 和 SocketIO 实例
+    from web_interface import socketio, app
 
     # 启动 Flask 应用
     socketio.run(app, host='0.0.0.0', port=5000)
