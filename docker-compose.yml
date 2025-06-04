@@ -15,6 +15,7 @@ services:
     volumes:
       - mysql1_data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
+    # command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=0
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
@@ -36,6 +37,7 @@ services:
     volumes:
       - mysql2_data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
+    # command: --default-authentication-plugin=mysql_native_password --lower_case_table_names=0
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
