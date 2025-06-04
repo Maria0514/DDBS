@@ -149,7 +149,7 @@ def run_concurrent_transactions():
     cursor = conn.cursor()
     cursor.execute("SELECT quantity FROM inventory WHERE product_id = %s", (101,))
     result = cursor.fetchone()
-    final_stock_101 = result['quantity'] if result else 0
+    final_stock_101 = result[0] if result else 0
     cursor.close()
     conn.close()
 
