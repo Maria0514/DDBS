@@ -89,6 +89,28 @@ class BankingService:
             if tm:
                 tm.cleanup()
 
+    def delete_account(self, account_id: int) -> bool:
+        """删除账户"""
+        conn = None
+        try:
+            conn = self.db_manager.get_connection('db1')
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM accounts WHERE id = %s", (account_id,))
+            conn.commit()
+            cursor.close()
+
+            log_system_info("BankingService", f"Account {account_id} deleted")
+            return True
+
+        except Exception as e:
+            log_system_error("BankingService.delete_account", f"Database error: {str(e)}")
+            return False
+        finally:
+            if conn:
+                try:
+                    conn.close()
+                except:
+                    pass
     def create_account(self, account_id: int, initial_balance: float = 0) -> bool:
         """创建账户"""
         conn = None
@@ -97,6 +119,7 @@ class BankingService:
             cursor = conn.cursor()
             cursor.execute("INSERT INTO accounts (id, balance) VALUES (%s, %s)",
                          (account_id, initial_balance))
+            # cursor.execute("UPDATE accounts SET balance = (%s) where account_id = (%s)", (initial_balance, account_id))
             conn.commit()
             cursor.close()
 
@@ -218,9 +241,9 @@ class DistributedApplication:
         """初始化示例数据"""
         try:
             # 创建示例账户
-            self.banking_service.create_account(1001, 5000.0)
-            self.banking_service.create_account(1002, 3000.0)
-            self.banking_service.create_account(1003, 1000.0)
+            self.banking_service.create_account(1011, 5000.0)
+            self.banking_service.create_account(1012, 3000.0)
+            self.banking_service.create_account(1013, 1000.0)
 
             # 创建示例库存
             conn = get_db_manager().get_connection('db1')
@@ -237,9 +260,9 @@ class DistributedApplication:
             """)
 
             # 插入示例库存数据
-            cursor.execute("INSERT IGNORE INTO inventory VALUES (101, 'Laptop', 50, 999.99)")
-            cursor.execute("INSERT IGNORE INTO inventory VALUES (102, 'Mouse', 200, 29.99)")
-            cursor.execute("INSERT IGNORE INTO inventory VALUES (103, 'Keyboard', 150, 79.99)")
+            cursor.execute("INSERT IGNORE INTO inventory VALUES (111, 'Laptop', 50, 999.99)")
+            cursor.execute("INSERT IGNORE INTO inventory VALUES (112, 'Mouse', 200, 29.99)")
+            cursor.execute("INSERT IGNORE INTO inventory VALUES (113, 'Keyboard', 150, 79.99)")
 
             conn.commit()
             cursor.close()
@@ -275,29 +298,29 @@ class DistributedApplication:
 
         # 场景1：银行转账
         print("场景1：银行转账")
-        print(f"账户1001余额: {self.banking_service.get_account_balance(1001)}")
-        print(f"账户1002余额: {self.banking_service.get_account_balance(1002)}")
+        print(f"账户1011余额: {self.banking_service.get_account_balance(1011)}")
+        print(f"账户1012余额: {self.banking_service.get_account_balance(1012)}")
 
-        success = self.banking_service.transfer_money(1001, 1002, 500.0)
+        success = self.banking_service.transfer_money(1011, 1012, 500.0)
         print(f"转账结果: {'成功' if success else '失败'}")
 
-        print(f"转账后账户1001余额: {self.banking_service.get_account_balance(1001)}")
-        print(f"转账后账户1002余额: {self.banking_service.get_account_balance(1002)}")
+        print(f"转账后账户1011余额: {self.banking_service.get_account_balance(1011)}")
+        print(f"转账后账户1012余额: {self.banking_service.get_account_balance(1012)}")
         print()
 
         # 场景2：库存管理
         print("场景2：库存管理")
         try:
-            result = get_db_manager().execute_query('db1', "SELECT * FROM inventory WHERE product_id = 101")
+            result = get_db_manager().execute_query('db1', "SELECT * FROM inventory WHERE product_id = 111")
             if result:
-                print(f"产品101库存: {result[0]['quantity']}")
+                print(f"产品111库存: {result[0]['quantity']}")
 
-            success = self.inventory_service.process_order(101, 2, 2001)
+            success = self.inventory_service.process_order(111, 2, 2001)
             print(f"订单处理结果: {'成功' if success else '失败'}")
 
-            result = get_db_manager().execute_query('db1', "SELECT * FROM inventory WHERE product_id = 101")
+            result = get_db_manager().execute_query('db1', "SELECT * FROM inventory WHERE product_id = 111")
             if result:
-                print(f"订单处理后产品101库存: {result[0]['quantity']}")
+                print(f"订单处理后产品111库存: {result[0]['quantity']}")
         except Exception as e:
             print(f"库存管理演示出错: {e}")
 
@@ -305,7 +328,7 @@ class DistributedApplication:
 
         # 场景3：异常处理（余额不足）
         print("场景3：异常处理（余额不足）")
-        success = self.banking_service.transfer_money(1003, 1001, 2000.0)  # 余额不足
+        success = self.banking_service.transfer_money(1013, 1011, 2000.0)  # 余额不足
         print(f"转账结果: {'成功' if success else '失败（余额不足）'}")
         print()
 
